@@ -33,4 +33,44 @@ public class Message implements Serializable {
     
     public Message() {
     }
+    
+    public Message(Utilisateur em, Utilisateur re, String message) {
+        this.emetteur=em;
+        this.recepteur=re;
+        this.message=message;
+    }
+
+    public Integer getIdMessage() {
+        return idMessage;
+    }
+
+    public void setIdMessage(Integer idMessage) {
+        this.idMessage = idMessage;
+    }
+
+    public Utilisateur getEmetteur() {
+        return emetteur;
+    }
+
+    public void setEmetteur(Utilisateur emetteur) {
+        this.emetteur = emetteur;
+    }
+
+    public Utilisateur getRecepteur() {
+        return recepteur;
+    }
+
+    public void setRecepteur(Utilisateur recepteur) {
+        this.recepteur = recepteur;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    
 }

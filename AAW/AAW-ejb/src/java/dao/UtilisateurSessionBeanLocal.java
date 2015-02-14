@@ -13,5 +13,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface UtilisateurSessionBeanLocal {
-    
+    public void save(Utilisateur i);
+    public void update(Utilisateur i);
+    public void delete(Utilisateur i);
 }

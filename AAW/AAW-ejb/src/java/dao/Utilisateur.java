@@ -49,4 +49,86 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
+    public Utilisateur(String email,String mdp,String nom) {
+        this.nom=nom;
+        this.email=email;
+        this.mdp=mdp;
+        this.amis=new ArrayList<Utilisateur>();
+        this.messagePublic=new ArrayList<Message>();
+        this.messagePersonel=new ArrayList<Message>();
+        this.filActu=new ArrayList<Message>();
+    }
+
+    public Integer getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(Integer idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public List<Utilisateur> getAmis() {
+        return amis;
+    }
+
+    public void setAmis(List<Utilisateur> amis) {
+        this.amis = amis;
+    }
+
+    public List<Message> getMessagePublic() {
+        return messagePublic;
+    }
+
+    public void setMessagePublic(List<Message> messagePublic) {
+        this.messagePublic = messagePublic;
+    }
+
+    public List<Message> getMessagePersonel() {
+        return messagePersonel;
+    }
+
+    public void setMessagePersonel(List<Message> messagePersonel) {
+        this.messagePersonel = messagePersonel;
+    }
+
+    public List<Message> getFilActu() {
+        return filActu;
+    }
+
+    public void setFilActu(List<Message> filActu) {
+        this.filActu = filActu;
+    }
+    
 }
