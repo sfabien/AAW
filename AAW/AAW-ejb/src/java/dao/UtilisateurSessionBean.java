@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 
 /**
  *
@@ -43,5 +44,18 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
     public void delete(Utilisateur h) {
         h = em.merge(h);
         em.remove(h);
+    }
+    
+    public Utilisateur getUtilisateur(String id){
+        Query q = em.createQuery(
+            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
+        q.setParameter(1,id);
+
+        if(!q.getResultList().isEmpty()){
+            Utilisateur u = (Utilisateur) q.getResultList().get(0);
+            return u;
+        }
+        
+        return null;
     }
 }

@@ -16,4 +16,5 @@ public interface UtilisateurSessionBeanLocal {
     public void save(Utilisateur i);
     public void update(Utilisateur i);
     public void delete(Utilisateur i);
+    public Utilisateur getUtilisateur(String id);
 }

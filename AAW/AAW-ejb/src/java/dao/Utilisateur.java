@@ -37,6 +37,9 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Utilisateur> amis;
     
+    @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<Utilisateur> demandeAmis;
+    
     @OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Message> messagePublic;
     
@@ -129,6 +132,14 @@ public class Utilisateur implements Serializable {
 
     public void setFilActu(List<Message> filActu) {
         this.filActu = filActu;
+    }
+
+    public List<Utilisateur> getDemandeAmis() {
+        return demandeAmis;
+    }
+
+    public void setDemandeAmis(List<Utilisateur> demandeAmis) {
+        this.demandeAmis = demandeAmis;
     }
     
 }
