@@ -70,7 +70,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
 
 
     @Override
-    public List<Message> mur(String idCourant, String idpersonne) {
+    public List<Message> mur(Integer idCourant, Integer idpersonne) {
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,idpersonne);

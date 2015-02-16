@@ -13,8 +13,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface AmisSessionBeanLocal {
-    public boolean demandeAmi(String utilisateurDemandeEnAmi, String utilisateurQuiDemande);
-    public boolean accepteAmi(String utilisateurQuiAccepte, String utilisateurQuiDemande);
-    public boolean refuseAmi(String utilisateurQuiRefuse, String utilisateurQuiDemande);
-    public boolean supprimeAmi(String utilisateurQuiSupprime, String amiASupprimer) ;
+    public boolean demandeAmi(Integer utilisateurDemandeEnAmi, Integer utilisateurQuiDemande);
+    public boolean accepteAmi(Integer utilisateurQuiAccepte, Integer utilisateurQuiDemande);
+    public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande);
+    public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) ;
 }

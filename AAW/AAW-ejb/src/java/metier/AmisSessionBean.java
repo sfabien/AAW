@@ -37,7 +37,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
 
     @Override
-    public boolean demandeAmi(String utilisateurDemandeEnAmi, String utilisateurQuiDemande) {
+    public boolean demandeAmi(Integer utilisateurDemandeEnAmi, Integer utilisateurQuiDemande) {
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiDemande);
@@ -56,7 +56,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
     
     @Override
-    public boolean accepteAmi(String utilisateurQuiAccepte, String utilisateurQuiDemande) {
+    public boolean accepteAmi(Integer utilisateurQuiAccepte, Integer utilisateurQuiDemande) {
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiAccepte);
@@ -77,7 +77,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
     
     @Override
-    public boolean refuseAmi(String utilisateurQuiRefuse, String utilisateurQuiDemande) {
+    public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande) {
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiRefuse);
@@ -96,7 +96,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
     
     @Override
-    public boolean supprimeAmi(String utilisateurQuiSupprime, String amiASupprimer) {
+    public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) {
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiSupprime);

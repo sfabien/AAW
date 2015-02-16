@@ -20,5 +20,5 @@ public interface EnvoieMessageSessionBeanLocal {
 
     public void envoieMessagePrive(Message h);
 
-    public List<Message> mur(String idCourant, String idpersonne);
+    public List<Message> mur(Integer idCourant, Integer idpersonne);
 }

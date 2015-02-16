@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+</faces-config>
+/***************************************/
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+<navigation-rule>
+        <from-view-id>/ajout.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{ajouterContactManagedBean.ajouterContact()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action> #{ajouterContactManagedBean.ajouterContact()}</from-action>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/ajout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+   <navigation-rule>
+        <from-view-id>/gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{deconnexion.deconnexion()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/creation.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{creationManagedBean.creation()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action> #{creationManagedBean.creation()}</from-action>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/creation.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{indexManagedBean.connexion()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action> #{indexManagedBean.connexion()}</from-action>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/supprcompte.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{suppresionCompteManagedBean.suppresion()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action> #{suppresionCompteManagedBean.suppresion()}</from-action>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/gestion.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/suppr.xhtml</from-view-id>
+        <navigation-case>
+            <from-action> #{supprimerContactManagedBean.supprimerContact()}</from-action>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action> #{supprimerContactManagedBean.supprimerContact()}</from-action>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/suppr.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+
+</faces-config>
