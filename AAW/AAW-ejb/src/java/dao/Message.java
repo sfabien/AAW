@@ -31,6 +31,28 @@ public class Message implements Serializable {
     @Column
     private String message;
     
+    @Column
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getDescriminant() {
+        return descriminant;
+    }
+
+    public void setDescriminant(Integer descriminant) {
+        this.descriminant = descriminant;
+    }
+    
+    @Column
+    private Integer descriminant;
+    
     public Message() {
     }
     
