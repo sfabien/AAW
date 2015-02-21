@@ -22,62 +22,30 @@ import javax.persistence.Query;
 public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLocal {
 
     @EJB
-    UtilisateurSessionBeanLocal usbl;
-    
-    /*@PersistenceContext(unitName="AAW-ejbPU",type=PersistenceContextType.TRANSACTION)
-    private EntityManager em; 
-    
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }*/
+    UtilisateurSessionBeanLocal utilisateurDao;
     
     @Override
-    public boolean creation(String id, String mdp, String nom, String prenom) {//TODO ....
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,id);*/
-
-        //if(q.getResultList().isEmpty()){
-            Utilisateur u = new Utilisateur(id,mdp,nom,prenom);
-            usbl.save(u);
+    public boolean creation(String id, String mdp, String nom, String prenom) {
+        Utilisateur u = utilisateurDao.find(id);
+        if(u==null) {
+            u = new Utilisateur(id,mdp,nom,prenom);
+            utilisateurDao.save(u);
             return true;
-        //}
-        //return false;
+        }
+        return false;
     }
     
     @Override
     public boolean supprimer(String id, String mdp){
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,id);
-
-        if(!q.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            if (u.getMdp().equals(mdp)){
-                usbl.delete(u);
-                return true;
-            }
-        }*/
         return false;
     }
     
     @Override
     public boolean connexion(String id, String mdp){
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,id);
-
-        if(!q.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            if (u.getMdp().equals(mdp)){
-                return true;
-            }
-        }*/
-        
+        Utilisateur u = utilisateurDao.find(id);
+        if(u!=null) {
+            return (u.getMdp().equals(mdp));
+        }
         return false;
     }
 }

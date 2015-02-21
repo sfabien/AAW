@@ -59,7 +59,7 @@
                         </div>
                     </h:form>
                     <p class="h-center">
-                        <h:outputText  value="#{creationManagedBean.message}"/>
+                        <h:outputText  value="#{creationManagedBean.messageInscription}"/>
                     </p>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                 <h:inputText class="form-control" id="AdresseElectronique" value="#{creationManagedBean.id}" p:placeholder="Adresse électronique" required="true" />
                             </div>
                             <div class="col-sm-offset-2 col-sm-8">
-                                <h:inputSecret class="form-control" id="MotDePasse" value="#{creationManagedBean.prenom}" p:placeholder="Mot de passe" required="true" />
+                                <h:inputSecret class="form-control" id="MotDePasse" value="#{creationManagedBean.mdp}" p:placeholder="Mot de passe" required="true" />
                             </div>
                             <br/>
                             <div class="col-sm-offset-3 col-sm-6">
@@ -85,6 +85,9 @@
                             </div>
                         </div>
                     </h:form>
+                    <p class="h-center">
+                        <h:outputText  value="#{creationManagedBean.messageConnexion}"/>
+                    </p>
                 </div>
             </div>
         </div>

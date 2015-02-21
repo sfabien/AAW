@@ -47,15 +47,7 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
     }
     
     @Override
-    public Utilisateur getUtilisateur(String id){
-        Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.email = ?").setParameter(1,id);
-
-        if(!q.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            return u;
-        }
-        
-        return null;
+    public Utilisateur find(String id){
+        return em.find(Utilisateur.class, id);
     }
 }

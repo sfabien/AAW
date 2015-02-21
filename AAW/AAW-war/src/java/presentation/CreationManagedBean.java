@@ -28,7 +28,8 @@ public class CreationManagedBean {
     private String nom;
     private String prenom;
     
-    private String message;
+    private String messageInscription;
+    private String messageConnexion;
     
     public CreationManagedBean() {
     }
@@ -65,32 +66,53 @@ public class CreationManagedBean {
         this.prenom = prenom;
     }
     
-    public String getMessage() {
-        return message;
+    public String getMessageInscription() {
+        return messageInscription;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageInscription(String message) {
+        this.messageInscription = message;
+    }
+
+    public String getMessageConnexion() {
+        return messageConnexion;
+    }
+
+    public void setMessageConnexion(String messageConnexion) {
+        this.messageConnexion = messageConnexion;
     }
     
     public boolean creation() {
         boolean test=authService.creation(id, mdp, nom, prenom);
-        if(!test){
-            message="error";
-            return false;
-        }
-        message="Compte créé avec succès ! Connectez-vous !";
-        FacesContext context = FacesContext.getCurrentInstance();  
-       /* Etape 2: On récupère la requête courante (stockée dans le contexte) */
-        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-       /* Etape 3: On récupère l'objet de type HttpSession*/
-        HttpSession httpSession = request.getSession(true);
-       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session*/
-        httpSession.setAttribute("id", id);
-        id = "";
         mdp = "";
         nom = "";
         prenom= "";
+        if(!test){
+            id = "";
+            messageInscription="Erreur : compte existant !";
+            return false;
+        }
+        messageInscription="Compte créé avec succès ! Connectez-vous !";
+        id = "";
+        return true;
+    }
+    
+    public boolean connexion(){
+        boolean test=authService.connexion(id, mdp);
+        mdp = "";
+        nom = "";
+        prenom= "";
+        if(!test){
+            id = "";
+            messageConnexion="Erreur ! Identifiants incorrects.";
+            return false;
+        }
+        FacesContext context = FacesContext.getCurrentInstance();  
+        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
+        HttpSession httpSession = request.getSession(true);
+        httpSession.setAttribute("id", id);
+        messageConnexion="Connexion réussie !";
+        id = "";
         return true;
     }
 }
