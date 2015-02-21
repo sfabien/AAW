@@ -9,8 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import metier.AnnuaireLocal;
+
 
 /**
  *
@@ -20,8 +19,8 @@ import metier.AnnuaireLocal;
 @RequestScoped
 public class IndexManagedBean {
 
-    @EJB
-    AnnuaireLocal service;
+    //@EJB
+    //AnnuaireLocal service;
     
     private String id;
     private String mdp;
@@ -54,7 +53,7 @@ public class IndexManagedBean {
         this.message = message;
     }
 
-
+/*
     public AnnuaireLocal getService() {
         return service;
     }
@@ -70,12 +69,12 @@ public class IndexManagedBean {
             return false;
         }
         FacesContext context = FacesContext.getCurrentInstance();  
-       /* Etape 2: On récupère la requête courante (stockée dans le contexte) */
+       /* Etape 2: On récupère la requête courante (stockée dans le contexte) 
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-       /* Etape 3: On récupère l'objet de type HttpSession*/
+       /* Etape 3: On récupère l'objet de type HttpSession
         HttpSession httpSession = request.getSession(true);
-       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session*/
+       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session
         httpSession.setAttribute("id", id);
         return true;
-    }
+    }*/
 }

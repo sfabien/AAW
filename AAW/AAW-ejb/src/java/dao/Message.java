@@ -18,15 +18,14 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @ManyToOne
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idMessage;
     
-    @Column
-    private Utilisateur emetteur;
+    //@Column
+    //private Utilisateur emetteur;
     
-    @Column
-    private Utilisateur recepteur;
+    //@Column
+    //private Utilisateur recepteur;
     
     @Column
     private String message;
@@ -56,9 +55,9 @@ public class Message implements Serializable {
     public Message() {
     }
     
-    public Message(Utilisateur em, Utilisateur re, String message) {
-        this.emetteur=em;
-        this.recepteur=re;
+    public Message(/*Utilisateur em, Utilisateur re,*/ String message) {
+        //this.emetteur=em;
+        //this.recepteur=re;
         this.message=message;
     }
 
@@ -70,7 +69,7 @@ public class Message implements Serializable {
         this.idMessage = idMessage;
     }
 
-    public Utilisateur getEmetteur() {
+    /*public Utilisateur getEmetteur() {
         return emetteur;
     }
 
@@ -84,7 +83,7 @@ public class Message implements Serializable {
 
     public void setRecepteur(Utilisateur recepteur) {
         this.recepteur = recepteur;
-    }
+    }*/
 
     public String getMessage() {
         return message;

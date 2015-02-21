@@ -10,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import metier.AnnuaireLocal;
+
 
 /**
  *
@@ -20,7 +20,7 @@ import metier.AnnuaireLocal;
 @RequestScoped
 public class SuppresionCompteManagedBean {
 
-    @EJB
+    /*@EJB
     AnnuaireLocal service;
     
     private String id;
@@ -57,11 +57,11 @@ public class SuppresionCompteManagedBean {
     public boolean suppresion(){
         boolean test=false;
          FacesContext context = FacesContext.getCurrentInstance();  
-       /* Etape 2: On récupère la requête courante (stockée dans le contexte) */
+       /* Etape 2: On récupère la requête courante (stockée dans le contexte) 
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-       /* Etape 3: On récupère l'objet de type HttpSession*/
+       /* Etape 3: On récupère l'objet de type HttpSession
         HttpSession httpSession = request.getSession(true);
-       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session*/
+       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session
         String idtmp=(String)httpSession.getAttribute("id");
 
        if(id.equals(idtmp))
@@ -71,5 +71,5 @@ public class SuppresionCompteManagedBean {
                 return true;
        }
        return false;
-    }
+    }*/
 }

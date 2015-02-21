@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -18,7 +19,7 @@ import javax.persistence.Query;
 @Stateless
 public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
 
-    @PersistenceContext(unitName="AAW-ejbPU",type=PersistenceContextType.TRANSACTION)
+    @PersistenceContext(unitName="AAW-ejbPU")
     private EntityManager em; 
     
     public EntityManager getEm() {
@@ -29,8 +30,10 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
         this.em = em;
     }
 
+    //@Transactional
     @Override
     public void save(Utilisateur h) {
+        if(h == null) return;
         h = em.merge(h);
         em.persist(h);
     }
@@ -46,6 +49,7 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
         em.remove(h);
     }
     
+    @Override
     public Utilisateur getUtilisateur(String id){
         Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");

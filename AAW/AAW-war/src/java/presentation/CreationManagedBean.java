@@ -10,18 +10,18 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import metier.AnnuaireLocal;
+import metier.AuthentificatorSessionBeanLocal;
+
 
 /**
  *
  * @author sfabien
  */
 @ManagedBean(name="creationManagedBean")
-@RequestScoped
 public class CreationManagedBean {
 
     @EJB
-    AnnuaireLocal service;
+    AuthentificatorSessionBeanLocal service;
     
     private String id;
     private String mdp;
@@ -53,18 +53,9 @@ public class CreationManagedBean {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
-    public AnnuaireLocal getService() {
-        return service;
-    }
-
-    public void setService(AnnuaireLocal service) {
-        this.service = service;
-    }
     
-    public boolean creation(){
-        boolean test=service.creationUser(id, mdp);
+    public boolean creation() throws Exception {
+        boolean test=service.creation(id, mdp);
         if(!test){
             message="error";
             return false;

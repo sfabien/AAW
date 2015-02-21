@@ -40,7 +40,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     @Override
     public void envoieMessagePublic(Message h) {
         msbl.save(h);
-        Utilisateur emetteur=h.getEmetteur();
+        /*Utilisateur emetteur=h.getEmetteur();
         Utilisateur destinataire = h.getRecepteur();
         destinataire.getMessagePublic().add(h);
         destinataire.getFilActu().add(h);
@@ -53,7 +53,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
             //evite les doublons
             if(!destinataire.getAmis().contains(u))
                 u.getFilActu().add(h);
-        }
+        }*/
         
         em.flush();
     }
@@ -61,10 +61,10 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     @Override
     public void envoieMessagePrive(Message h) {
         msbl.save(h);
-        Utilisateur emetteur=h.getEmetteur();
+        /*Utilisateur emetteur=h.getEmetteur();
         Utilisateur destinataire = h.getRecepteur();
         destinataire.getMessagePersonel().add(h);
-        emetteur.getMessagePersonel().add(h);
+        emetteur.getMessagePersonel().add(h);*/
         em.flush();
     }
 
@@ -77,7 +77,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
         
         if(!q.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            if(idCourant.equals(idpersonne)){
+            /*if(idCourant.equals(idpersonne)){
                 List<Message> m = u.getMessagePersonel();
                 for(Message me:u.getMessagePublic()){
                     m.add(me);
@@ -85,7 +85,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                 return m;
             }else{
                 return u.getMessagePublic();
-            }
+            }*/
         }
         return null;
     }

@@ -49,7 +49,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);
             Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            u2.getDemandeAmis().add(u);
+            //u2.getDemandeAmis().add(u);
             return true;
         }
         return false;
@@ -68,9 +68,9 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);
             Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            u.getDemandeAmis().remove(u2);
-            u2.getAmis().add(u);
-            u.getAmis().add(u2);
+            //u.getDemandeAmis().remove(u2);
+            //u2.getAmis().add(u);
+            //u.getAmis().add(u2);
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);
             Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            u.getDemandeAmis().remove(u2);
+            //u.getDemandeAmis().remove(u2);
             return true;
         }
         return false;
@@ -108,8 +108,8 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);
             Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            u2.getAmis().remove(u);
-            u.getAmis().remove(u2);
+            //u2.getAmis().remove(u);
+            //u.getAmis().remove(u2);
             return true;
         }
         return false;

@@ -10,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import metier.AnnuaireLocal;
+
 
 /**
  *
@@ -20,16 +20,14 @@ import metier.AnnuaireLocal;
 @RequestScoped
 public class SupprimerContactManagedBean {
 
-    @EJB
+    /*@EJB
     AnnuaireLocal service;
     
     private String name;
     private String firstname;
     private String number;
     private String message;
-    /**
-     * Creates a new instance of AjouterContactManagedBean
-     */
+
     public SupprimerContactManagedBean() {
     }
 
@@ -67,16 +65,16 @@ public class SupprimerContactManagedBean {
     
     public boolean supprimerContact(){
         FacesContext context = FacesContext.getCurrentInstance();  
-       /* Etape 2: On récupère la requête courante (stockée dans le contexte) */
+       /* Etape 2: On récupère la requête courante (stockée dans le contexte) 
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-       /* Etape 3: On récupère l'objet de type HttpSession*/
+       /* Etape 3: On récupère l'objet de type HttpSession
         HttpSession httpSession = request.getSession(true);
-       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session*/
+       /* Etape 4: On récupère l'attribut de type EJB stockée dans la session
         String id = (String) httpSession.getAttribute("id");
         boolean test=service.supprimerContact(id, name, firstname, number);
         if(!test){
             message="error";
         }
         return test;
-    }
+    }*/
 }

@@ -18,9 +18,7 @@ public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @ManyToOne
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idUtilisateur;
+    private String email;
     
     @Column
     private String nom;
@@ -29,47 +27,43 @@ public class Utilisateur implements Serializable {
     private String prenom;
     
     @Column
-    private String email;
-    
-    @Column
     private String mdp;
 
-    @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<Utilisateur> amis;
+    //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //private List<Utilisateur> amis;
     
-    @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<Utilisateur> demandeAmis;
+   // @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //private List<Utilisateur> demandeAmis;
     
-    @OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<Message> messagePublic;
+    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //private List<Message> messagePublic;
     
-    @OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<Message> messagePersonel;
+    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //private List<Message> messagePersonel;
     
-    @OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private List<Message> filActu;
-    
+    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //private List<Message> filActu;
+
     public Utilisateur() {
+    }   
+    
+    public Utilisateur(String mail, String mdp) {
+        this.nom="default";
+        this.prenom ="default";
+        this.email=mail;
+        this.mdp=mdp;
     }
     
     public Utilisateur(String email,String mdp,String nom) {
         this.nom=nom;
         this.email=email;
         this.mdp=mdp;
-        this.amis=new ArrayList<Utilisateur>();
-        this.messagePublic=new ArrayList<Message>();
-        this.messagePersonel=new ArrayList<Message>();
-        this.filActu=new ArrayList<Message>();
+        //this.amis=new ArrayList<Utilisateur>();
+        //this.messagePublic=new ArrayList<Message>();
+        //this.messagePersonel=new ArrayList<Message>();
+        //this.filActu=new ArrayList<Message>();
     }
-
-    public Integer getIdUtilisateur() {
-        return idUtilisateur;
-    }
-
-    public void setIdUtilisateur(Integer idUtilisateur) {
-        this.idUtilisateur = idUtilisateur;
-    }
-
+    
     public String getNom() {
         return nom;
     }
@@ -102,7 +96,7 @@ public class Utilisateur implements Serializable {
         this.mdp = mdp;
     }
 
-    public List<Utilisateur> getAmis() {
+    /*public List<Utilisateur> getAmis() {
         return amis;
     }
 
@@ -140,6 +134,6 @@ public class Utilisateur implements Serializable {
 
     public void setDemandeAmis(List<Utilisateur> demandeAmis) {
         this.demandeAmis = demandeAmis;
-    }
+    }*/
     
 }
