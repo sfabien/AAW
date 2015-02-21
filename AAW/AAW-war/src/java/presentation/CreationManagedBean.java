@@ -79,6 +79,7 @@ public class CreationManagedBean {
             message="error";
             return false;
         }
+        message="Compte créé avec succès ! Connectez-vous !";
         FacesContext context = FacesContext.getCurrentInstance();  
        /* Etape 2: On récupère la requête courante (stockée dans le contexte) */
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
@@ -86,6 +87,10 @@ public class CreationManagedBean {
         HttpSession httpSession = request.getSession(true);
        /* Etape 4: On récupère l'attribut de type EJB stockée dans la session*/
         httpSession.setAttribute("id", id);
+        id = "";
+        mdp = "";
+        nom = "";
+        prenom= "";
         return true;
     }
 }

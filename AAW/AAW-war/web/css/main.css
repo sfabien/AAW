@@ -1,8 +1,11 @@
 body {
-	padding-top: 60px;
+	padding-top: 90px;
+}
+
+.bg-img {
         background-image:url(../img/Social-AAW.jpg);
         background-repeat:no-repeat;
-        background-position:center center;
+        background-position:50% 0%;
 }
 
 .h-center {

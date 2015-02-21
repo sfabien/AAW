@@ -5,17 +5,17 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width"></meta>
-        
+
         <link href="css/bootstrap.min.css" rel="stylesheet"></link>
         <link href="css/main.css" rel="stylesheet"></link>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
         <title>Social-AAW</title>
     </h:head>
-    <h:body>
-        
+    <h:body class="bg-img">
+
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -30,9 +30,6 @@
         </div>
 
         <div class="container">
-            <h2>
-                <h:outputText value="#{indexManagedBean.message}"/>
-            </h2>
             <div class="col-xs-10 col-xs-offset-1 col-sm-5">
                 <div class="well well-sm ">
                     <p>
@@ -57,9 +54,13 @@
                             <div class="col-sm-offset-3 col-sm-6">
                                 <br/>
                                 <h:commandButton class="form-control btn btn-info" action="#{creationManagedBean.creation()}" value="Inscription"/>
+                                <br/><br/>
                             </div>
                         </div>
                     </h:form>
+                    <p class="h-center">
+                        <h:outputText  value="#{creationManagedBean.message}"/>
+                    </p>
                 </div>
             </div>
             <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0">
@@ -80,6 +81,7 @@
                             <div class="col-sm-offset-3 col-sm-6">
                                 <br/>
                                 <h:commandButton class="form-control btn btn-info" action="#{creationManagedBean.connexion()}" value="Connexion"/>
+                                <br/><br/>
                             </div>
                         </div>
                     </h:form>
