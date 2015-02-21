@@ -47,21 +47,11 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }   
     
-    public Utilisateur(String mail, String mdp) {
-        this.nom="default";
-        this.prenom ="default";
-        this.email=mail;
-        this.mdp=mdp;
-    }
-    
-    public Utilisateur(String email,String mdp,String nom) {
-        this.nom=nom;
+    public Utilisateur(String email,String mdp,String nom, String prenom) {
         this.email=email;
         this.mdp=mdp;
-        //this.amis=new ArrayList<Utilisateur>();
-        //this.messagePublic=new ArrayList<Message>();
-        //this.messagePersonel=new ArrayList<Message>();
-        //this.filActu=new ArrayList<Message>();
+        this.nom=nom;
+        this.prenom=prenom;
     }
     
     public String getNom() {

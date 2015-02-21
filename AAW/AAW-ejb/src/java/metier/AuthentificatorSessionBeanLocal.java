@@ -13,7 +13,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface AuthentificatorSessionBeanLocal {
-    public boolean creation(String id, String mdp) ;
+    public boolean creation(String id, String mdp, String nom, String prenom) ;
     
     public boolean supprimer(String id, String mdp);
     

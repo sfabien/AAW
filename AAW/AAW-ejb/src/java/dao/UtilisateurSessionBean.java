@@ -8,9 +8,7 @@ package dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 /**
  *
@@ -33,7 +31,6 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
     //@Transactional
     @Override
     public void save(Utilisateur h) {
-        if(h == null) return;
         h = em.merge(h);
         em.persist(h);
     }
@@ -52,8 +49,7 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
     @Override
     public Utilisateur getUtilisateur(String id){
         Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,id);
+            "SELECT h FROM Utilisateur h WHERE h.email = ?").setParameter(1,id);
 
         if(!q.getResultList().isEmpty()){
             Utilisateur u = (Utilisateur) q.getResultList().get(0);

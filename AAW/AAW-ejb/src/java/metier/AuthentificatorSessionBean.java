@@ -36,13 +36,13 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
     }*/
     
     @Override
-    public boolean creation(String id, String mdp) {//TODO ....
+    public boolean creation(String id, String mdp, String nom, String prenom) {//TODO ....
         /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,id);*/
 
         //if(q.getResultList().isEmpty()){
-            Utilisateur u = new Utilisateur(id,mdp);
+            Utilisateur u = new Utilisateur(id,mdp,nom,prenom);
             usbl.save(u);
             return true;
         //}

@@ -21,10 +21,13 @@ import metier.AuthentificatorSessionBeanLocal;
 public class CreationManagedBean {
 
     @EJB
-    AuthentificatorSessionBeanLocal service;
+    AuthentificatorSessionBeanLocal authService;
     
     private String id;
     private String mdp;
+    private String nom;
+    private String prenom;
+    
     private String message;
     
     public CreationManagedBean() {
@@ -46,6 +49,22 @@ public class CreationManagedBean {
         this.mdp = mdp;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
     public String getMessage() {
         return message;
     }
@@ -54,8 +73,8 @@ public class CreationManagedBean {
         this.message = message;
     }
     
-    public boolean creation() throws Exception {
-        boolean test=service.creation(id, mdp);
+    public boolean creation() {
+        boolean test=authService.creation(id, mdp, nom, prenom);
         if(!test){
             message="error";
             return false;

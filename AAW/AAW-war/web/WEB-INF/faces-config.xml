@@ -31,7 +31,7 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/creation.xhtml</from-view-id>
+        <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
             <from-action> #{creationManagedBean.creation()}</from-action>
             <from-outcome>true</from-outcome>
@@ -41,20 +41,6 @@
             <from-action> #{creationManagedBean.creation()}</from-action>
             <from-outcome>false</from-outcome>
             <to-view-id>/creation.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
-        <navigation-case>
-            <from-action> #{indexManagedBean.connexion()}</from-action>
-            <from-outcome>true</from-outcome>
-            <to-view-id>/gestion.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action> #{indexManagedBean.connexion()}</from-action>
-            <from-outcome>false</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
