@@ -9,6 +9,7 @@ import dao.Message;
 import dao.MessageSessionBeanLocal;
 import dao.Utilisateur;
 import dao.UtilisateurSessionBeanLocal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -57,7 +58,9 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
 
 
     @Override
-    public List<Message> mur(Integer idCourant, Integer idpersonne) {
+    public ArrayList<Message> mur(Utilisateur u) {
+        return messageDao.listByUser(u);
+        
         /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,idpersonne);*/
@@ -74,6 +77,5 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                 return u.getMessagePublic();
             }*/
         //}
-        return null;
     }
 }

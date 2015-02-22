@@ -7,6 +7,7 @@ package metier;
 
 import dao.Message;
 import dao.Utilisateur;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -18,5 +19,5 @@ import javax.ejb.Local;
 public interface EnvoieMessageSessionBeanLocal {
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur);
     public void envoieMessagePrive(Message h);
-    public List<Message> mur(Integer idCourant, Integer idpersonne);
+    public ArrayList<Message> mur(Utilisateur u);
 }

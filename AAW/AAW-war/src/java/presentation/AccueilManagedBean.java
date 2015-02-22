@@ -4,7 +4,9 @@
  */
 package presentation;
 
+import dao.Message;
 import dao.Utilisateur;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -54,6 +56,10 @@ public class AccueilManagedBean {
         return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getPrenom();
     }
 
+    public ArrayList<Message> getMessages() {
+        return envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
+    }
+    
     public void envoieMessage(){
         Utilisateur u = authService.getUtilisateur((String)getHttpSession().getAttribute("id"));
         envoieMessageService.envoieMessagePublic(message,u,u);

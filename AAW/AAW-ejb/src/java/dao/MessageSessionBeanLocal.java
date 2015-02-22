@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
@@ -16,4 +17,5 @@ public interface MessageSessionBeanLocal {
     public Message save(Message i);
     public void update(Message i);
     public void delete(Message i);
+    public ArrayList<Message> listByUser(Utilisateur u);
 }

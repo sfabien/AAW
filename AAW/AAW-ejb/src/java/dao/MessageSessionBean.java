@@ -5,10 +5,12 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 
 /**
  *
@@ -44,5 +46,10 @@ public class MessageSessionBean implements MessageSessionBeanLocal {
     public void delete(Message h) {
         h = em.merge(h);
         em.remove(h);
+    }
+
+    @Override
+    public ArrayList<Message> listByUser(Utilisateur u) {
+        return new ArrayList<>(em.createQuery("SELECT m FROM Message m WHERE m.emetteur = :user OR m.recepteur = :user",Message.class).setParameter("user", u).getResultList());
     }
 }

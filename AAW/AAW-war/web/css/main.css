@@ -54,3 +54,8 @@ body {
 .droite {
    text-align: right;
 }
+
+.form-control[readonly] {
+  cursor: default;
+  background-color: #fff;
+}
