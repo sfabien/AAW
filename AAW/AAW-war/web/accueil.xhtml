@@ -40,7 +40,34 @@
         </div>
 
         <div class="container">
+            <div class=" col-sm-12">
+                <div class="col-sm-3">
+                    <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
+                    <br/>
+                    <h:outputText id="Nom" value="#{accueilManagedBean.nom}" />
+                    <br/>
+                    <h:outputText id="Prenom" value="#{accueilManagedBean.prenom}" />
+                </div>
+                <div class=" col-sm-8">
+                    <div class="panel  panel-primary">
 
+                        <div class="panel-heading panel-title">Écrire un commentaire</div>
+
+                        <h:form>
+                            <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre commentaire ici..." required="true"/>
+
+                            <div class="panel-footer">
+
+                                <h:commandButton class="droite btn btn-info" action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
+
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="panel panel-orange">
+                        <div class="panel-heading panel-title">Fil d'actualité</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </h:body>

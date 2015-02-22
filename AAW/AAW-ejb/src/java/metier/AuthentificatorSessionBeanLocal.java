@@ -4,7 +4,7 @@
  */
 package metier;
 
-import java.util.List;
+import dao.Utilisateur;
 import javax.ejb.Local;
 
 /**
@@ -18,4 +18,6 @@ public interface AuthentificatorSessionBeanLocal {
     public boolean supprimer(String id, String mdp);
     
     public boolean connexion(String id, String mdp);
+    
+    public Utilisateur getUtilisateur(String id);
 }

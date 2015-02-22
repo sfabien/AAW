@@ -8,7 +8,7 @@ package metier;
 import dao.Message;
 import dao.MessageSessionBeanLocal;
 import dao.Utilisateur;
-import java.util.ArrayList;
+import dao.UtilisateurSessionBeanLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,59 +24,46 @@ import javax.persistence.Query;
 @Stateless
 public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     @EJB
-    MessageSessionBeanLocal msbl;
+    MessageSessionBeanLocal messageDao;
     
-    @PersistenceContext(unitName="AAW-ejbPU",type=PersistenceContextType.TRANSACTION)
-    private EntityManager em; 
-    
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
+    @EJB
+    UtilisateurSessionBeanLocal utilisateurDao;
 
     @Override
-    public void envoieMessagePublic(Message h) {
-        msbl.save(h);
-        /*Utilisateur emetteur=h.getEmetteur();
-        Utilisateur destinataire = h.getRecepteur();
-        destinataire.getMessagePublic().add(h);
-        destinataire.getFilActu().add(h);
-        emetteur.getMessagePublic().add(h);
-        
-        for(Utilisateur u : destinataire.getAmis()){
-            u.getFilActu().add(h);
+    public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
+        Message m = new Message(message,emetteur,recepteur,Message.PUBLIC);
+        messageDao.save(m);
+        if(recepteur.getEmail().equals(emetteur.getEmail())) {
+            recepteur.addMessage(m);
+            utilisateurDao.update(recepteur);
         }
-        for(Utilisateur u : emetteur.getAmis()){
-            //evite les doublons
-            if(!destinataire.getAmis().contains(u))
-                u.getFilActu().add(h);
-        }*/
-        
-        em.flush();
+        else {
+            recepteur.addMessage(m);
+            utilisateurDao.update(recepteur);
+            emetteur.addMessage(m);
+            utilisateurDao.update(emetteur);
+        }
     }
 
     @Override
     public void envoieMessagePrive(Message h) {
-        msbl.save(h);
+        //messageDao.save(h);
         /*Utilisateur emetteur=h.getEmetteur();
         Utilisateur destinataire = h.getRecepteur();
         destinataire.getMessagePersonel().add(h);
         emetteur.getMessagePersonel().add(h);*/
-        em.flush();
+        //em.flush();
     }
 
 
     @Override
     public List<Message> mur(Integer idCourant, Integer idpersonne) {
-        Query q = em.createQuery(
+        /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,idpersonne);
+        q.setParameter(1,idpersonne);*/
         
-        if(!q.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
+        /*if(!q.getResultList().isEmpty()){
+            Utilisateur u = (Utilisateur) q.getResultList().get(0);*/
             /*if(idCourant.equals(idpersonne)){
                 List<Message> m = u.getMessagePersonel();
                 for(Message me:u.getMessagePublic()){
@@ -86,7 +73,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
             }else{
                 return u.getMessagePublic();
             }*/
-        }
+        //}
         return null;
     }
 }

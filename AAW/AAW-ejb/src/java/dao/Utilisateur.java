@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.io.Serializable;
@@ -9,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author sfabien
- */
 @Entity
 public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -28,18 +20,21 @@ public class Utilisateur implements Serializable {
     
     @Column
     private String mdp;
+    
+    @Column
+    private String image;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Message> messages = new ArrayList<>();
+    
     //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Utilisateur> amis;
     
-   // @OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Utilisateur> demandeAmis;
     
     //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Message> messagePublic;
-    
-    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //private List<Message> messagePersonel;
     
     //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Message> filActu;
@@ -52,6 +47,26 @@ public class Utilisateur implements Serializable {
         this.mdp=mdp;
         this.nom=nom;
         this.prenom=prenom;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+    
+    public void addMessage(Message m) {
+        this.messages.add(m);
     }
     
     public String getNom() {
@@ -85,45 +100,4 @@ public class Utilisateur implements Serializable {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
-
-    /*public List<Utilisateur> getAmis() {
-        return amis;
-    }
-
-    public void setAmis(List<Utilisateur> amis) {
-        this.amis = amis;
-    }
-
-    public List<Message> getMessagePublic() {
-        return messagePublic;
-    }
-
-    public void setMessagePublic(List<Message> messagePublic) {
-        this.messagePublic = messagePublic;
-    }
-
-    public List<Message> getMessagePersonel() {
-        return messagePersonel;
-    }
-
-    public void setMessagePersonel(List<Message> messagePersonel) {
-        this.messagePersonel = messagePersonel;
-    }
-
-    public List<Message> getFilActu() {
-        return filActu;
-    }
-
-    public void setFilActu(List<Message> filActu) {
-        this.filActu = filActu;
-    }
-
-    public List<Utilisateur> getDemandeAmis() {
-        return demandeAmis;
-    }
-
-    public void setDemandeAmis(List<Utilisateur> demandeAmis) {
-        this.demandeAmis = demandeAmis;
-    }*/
-    
 }

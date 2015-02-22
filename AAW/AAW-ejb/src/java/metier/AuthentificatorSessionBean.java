@@ -6,13 +6,8 @@ package metier;
 
 import dao.Utilisateur;
 import dao.UtilisateurSessionBeanLocal;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.Query;
 
 /**
  *
@@ -47,5 +42,10 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
             return (u.getMdp().equals(mdp));
         }
         return false;
+    }
+
+    @Override
+    public Utilisateur getUtilisateur(String id) {
+        return utilisateurDao.find(id);
     }
 }

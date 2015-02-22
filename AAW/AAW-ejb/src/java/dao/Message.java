@@ -1,31 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author sfabien
- */
 @Entity
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    public static final Integer PUBLIC = 1;
+    public static final Integer PRIVEE = 2;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idMessage;
+    private Long id;
     
-    //@Column
-    //private Utilisateur emetteur;
+    @ManyToOne
+    private Utilisateur emetteur;
     
-    //@Column
-    //private Utilisateur recepteur;
+    @ManyToOne
+    private Utilisateur recepteur;
     
     @Column
     private String message;
@@ -33,43 +26,20 @@ public class Message implements Serializable {
     @Column
     private String url;
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Integer getDescriminant() {
-        return descriminant;
-    }
-
-    public void setDescriminant(Integer descriminant) {
-        this.descriminant = descriminant;
-    }
-    
     @Column
-    private Integer descriminant;
+    private Integer discriminant;
     
     public Message() {
     }
     
-    public Message(/*Utilisateur em, Utilisateur re,*/ String message) {
-        //this.emetteur=em;
-        //this.recepteur=re;
+    public Message(String message, Utilisateur em, Utilisateur re, int discrimant) {
+        this.emetteur=em;
+        this.recepteur=re;
         this.message=message;
+        this.discriminant=discrimant;
     }
 
-    public Integer getIdMessage() {
-        return idMessage;
-    }
-
-    public void setIdMessage(Integer idMessage) {
-        this.idMessage = idMessage;
-    }
-
-    /*public Utilisateur getEmetteur() {
+        public Utilisateur getEmetteur() {
         return emetteur;
     }
 
@@ -83,7 +53,31 @@ public class Message implements Serializable {
 
     public void setRecepteur(Utilisateur recepteur) {
         this.recepteur = recepteur;
-    }*/
+    }
+    
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getDiscriminant() {
+        return discriminant;
+    }
+
+    public void setDiscriminant(Integer discriminant) {
+        this.discriminant = discriminant;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getMessage() {
         return message;
@@ -92,6 +86,4 @@ public class Message implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-    
-    
 }
