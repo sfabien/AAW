@@ -29,9 +29,10 @@ public class MessageSessionBean implements MessageSessionBeanLocal {
     }
 
     @Override
-    public void save(Message h) {
+    public Message save(Message h) {
         h = em.merge(h);
         em.persist(h);
+        return h;
     }
 
     @Override

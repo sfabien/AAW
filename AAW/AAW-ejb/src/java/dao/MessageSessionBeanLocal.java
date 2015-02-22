@@ -13,7 +13,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface MessageSessionBeanLocal {
-    public void save(Message i);
+    public Message save(Message i);
     public void update(Message i);
     public void delete(Message i);
 }

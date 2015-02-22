@@ -32,15 +32,15 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     @Override
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
         Message m = new Message(message,emetteur,recepteur,Message.PUBLIC);
-        messageDao.save(m);
+        Message mess = messageDao.save(m);
         if(recepteur.getEmail().equals(emetteur.getEmail())) {
-            recepteur.addMessage(m);
+            recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
         }
         else {
-            recepteur.addMessage(m);
+            recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
-            emetteur.addMessage(m);
+            emetteur.addMessage(mess);
             utilisateurDao.update(emetteur);
         }
     }
