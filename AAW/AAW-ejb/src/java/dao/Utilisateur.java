@@ -52,6 +52,7 @@ public class Utilisateur implements Serializable {
         this.mdp=mdp;
         this.nom=nom;
         this.prenom=prenom;
+        this.image = "http://res.cloudinary.com/df6myek6a/image/upload/v1418980152/default_avatar.png";
     }
 
     public void addAmi(Utilisateur u) {

@@ -55,6 +55,10 @@ public class AccueilManagedBean {
         return new Date(cal.getTimeInMillis());
     }
     
+    public String getImage() {
+        return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getImage();
+    }
+    
     public String getNom() {
         return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getNom();
     }
