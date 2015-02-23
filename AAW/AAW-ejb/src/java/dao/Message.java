@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +26,10 @@ public class Message implements Serializable {
     
     @Column
     private String url;
+    
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateEnvoi;
 
     @Column
     private Integer discriminant;
@@ -39,7 +44,15 @@ public class Message implements Serializable {
         this.discriminant=discrimant;
     }
 
-        public Utilisateur getEmetteur() {
+    public Date getDateEnvoi() {
+        return dateEnvoi;
+    }
+
+    public void setDateEnvoi(Date dateEnvoi) {
+        this.dateEnvoi = dateEnvoi;
+    }
+
+    public Utilisateur getEmetteur() {
         return emetteur;
     }
 

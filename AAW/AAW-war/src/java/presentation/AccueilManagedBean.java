@@ -7,6 +7,8 @@ package presentation;
 import dao.Message;
 import dao.Utilisateur;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -48,6 +50,11 @@ public class AccueilManagedBean {
         return (String)getHttpSession().getAttribute("id");
     }
 
+    public Date getDate() {
+        Calendar cal = Calendar.getInstance();
+        return new Date(cal.getTimeInMillis());
+    }
+    
     public String getNom() {
         return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getNom();
     }

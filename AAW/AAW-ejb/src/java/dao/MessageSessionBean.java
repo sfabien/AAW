@@ -6,6 +6,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,6 +34,8 @@ public class MessageSessionBean implements MessageSessionBeanLocal {
 
     @Override
     public Message save(Message h) {
+        Calendar cal = Calendar.getInstance();
+        h.setDateEnvoi(new Date(cal.getTimeInMillis()));
         h = em.merge(h);
         em.persist(h);
         return h;

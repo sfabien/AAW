@@ -10,6 +10,8 @@ import dao.MessageSessionBeanLocal;
 import dao.Utilisateur;
 import dao.UtilisateurSessionBeanLocal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -59,8 +61,14 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
 
     @Override
     public ArrayList<Message> mur(Utilisateur u) {
-        return messageDao.listByUser(u);
-        
+        ArrayList<Message> mess = messageDao.listByUser(u);
+        Collections.sort(mess, new Comparator<Message>() {
+            @Override
+            public int compare(Message s1, Message s2) {
+                return -s1.getDateEnvoi().compareTo(s2.getDateEnvoi());
+            }
+        });
+        return mess;
         /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,idpersonne);*/
