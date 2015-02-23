@@ -43,7 +43,7 @@
 
         <div class="container">
             <div class=" col-sm-12">
-                <div class="col-sm-3">
+                <div class="col-sm-3 well well-sm">
                     <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
                     <br/>
                     <h:outputText id="Nom" value="#{accueilManagedBean.nom} " />
@@ -55,32 +55,34 @@
                         <h:form>
                             <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre commentaire ici..." required="true"/>
                             <div class="panel-footer">
-                                <h:commandButton class="droite btn btn-info" action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
+                                <h:commandButton class="btn btn-info " action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
                             </div>
                         </h:form>
                     </div>
                     <br/>
-                    <div class="panel panel-orange">
-                        <div class="panel-heading panel-title">Fil d'actualité</div>
-                    </div>
-                    <f:view>
-                        <h:form>
-                            <c:forEach items="#{accueilManagedBean.messages}" var="item">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading panel-title">
-                                        #{item.emetteur.nom} #{item.emetteur.prenom} 
-                                        <br/>
-                                        <h:outputText value="#{item.dateEnvoi}">
-                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy hh:mm"/>
-                                        </h:outputText>
-                                         
-  
+                    <div class="well well-sm ">
+                        <div class="panel panel-orange">
+                            <div class="panel-heading panel-title">Fil d'actualité</div>
+                        </div>
+                        <f:view>
+                            <h:form>
+                                <c:forEach items="#{accueilManagedBean.messages}" var="item">
+                                    <div class="panel">
+                                        <div class="panel-heading panel-title">
+                                            #{item.emetteur.nom} #{item.emetteur.prenom} 
+                                            <br/>
+                                            <h:outputText value="#{item.dateEnvoi}">
+                                                <f:convertDateTime type="date" pattern="dd-MM-yyyy hh:mm"/>
+                                            </h:outputText>
+
+
+                                        </div>
+                                        <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
                                     </div>
-                                    <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
-                                </div>
-                            </c:forEach>
-                        </h:form>
-                    </f:view>
+                                </c:forEach>
+                            </h:form>
+                        </f:view>
+                    </div>
                 </div>
             </div>
         </div>

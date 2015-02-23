@@ -1,5 +1,6 @@
 body {
 	padding-top: 90px;
+        background-color: #e0e0e0;
 }
 
 .bg-img {
@@ -11,6 +12,12 @@ body {
 .h-center {
 	width: 100%;
 	text-align: center;
+}
+
+.panel-heading {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    //border-radius: 4px;
 }
 
 .panel-orange {
