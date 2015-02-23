@@ -5,6 +5,9 @@
  */
 package metier;
 
+import dao.Message;
+import dao.Utilisateur;
+import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
@@ -17,4 +20,5 @@ public interface AmisSessionBeanLocal {
     public boolean accepteAmi(Integer utilisateurQuiAccepte, Integer utilisateurQuiDemande);
     public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande);
     public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) ;
+    public ArrayList<Utilisateur> rechercheAmi(String nom, String prenom);
 }

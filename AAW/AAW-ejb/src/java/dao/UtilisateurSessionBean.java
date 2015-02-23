@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,5 +50,10 @@ public class UtilisateurSessionBean implements UtilisateurSessionBeanLocal {
     @Override
     public Utilisateur find(String id){
         return em.find(Utilisateur.class, id);
+    }
+
+    @Override
+    public ArrayList<Utilisateur> findByNameAndFirstname(String nom, String prenom) {
+        return new ArrayList<>(em.createQuery("SELECT u FROM Utilisateur u WHERE LOWER(u.nom) LIKE LOWER(:nomuser) AND LOWER(u.prenom) LIKE LOWER(:prenomuser)",Utilisateur.class).setParameter("nomuser", nom+"%").setParameter("prenomuser", prenom+"%").getResultList());
     }
 }

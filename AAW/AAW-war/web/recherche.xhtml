@@ -2,7 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough" >
     <h:head>
         <meta name="viewport" content="width=device-width"></meta>
 
@@ -16,7 +19,7 @@
     </h:head>
     <h:body>
 
-                <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,28 +49,25 @@
                     <p>
                         <h1 class="form-signin-heading h-center">Recherche d'un ami</h1>
                     </p>
-                    <h:form id="Inscription">
+                    <h:form id="Recherche">
                         <div class="row separation-actions">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <br/>
-                                <h:inputText class="form-control" id="Nom" value="#{creationManagedBean.nom}" p:placeholder="Nom" required="true" />
+                                <h:inputText class="form-control" id="Nom" value="#{rechercheAmiManagedBean.nom}" p:placeholder="Nom" required="true" />
                             </div>
                             <div class="col-sm-offset-2 col-sm-8">
-                                <h:inputText class="form-control" id="Prenom" value="#{creationManagedBean.prenom}" p:placeholder="Prénom" required="true" />
-                            </div>
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <h:inputText class="form-control" id="AdresseElectronique" value="#{creationManagedBean.id}" p:placeholder="Adresse électronique" required="true" />
+                                <h:inputText class="form-control" id="Prenom" value="#{rechercheAmiManagedBean.prenom}" p:placeholder="Prénom" required="true" />
                             </div>
                             <br/>
                             <div class="col-sm-offset-3 col-sm-6">
                                 <br/>
-                                <h:commandButton class="form-control btn btn-info" action="#{creationManagedBean.creation()}" value="Rechercher"/>
+                                <h:commandButton class="form-control btn btn-info" action="#{rechercheAmiManagedBean.recherche()}" value="Rechercher"/>
                                 <br/><br/>
                             </div>
                         </div>
                     </h:form>
                     <p class="h-center">
-                        <h:outputText  value="#{creationManagedBean.messageInscription}"/>
+                        <h:outputText  value="#{rechercheAmiManagedBean.message}"/>
                     </p>
                 </div>
             </div>
@@ -76,10 +76,26 @@
                     <p>
                         <h1 class="form-signin-heading h-center">Résultats</h1>
                     </p>
-                    
+                    <br/>
+                    <h:form>
+                        <c:forEach items="#{rechercheAmiManagedBean.amis}" var="item">
+                            <div class="panel">
+                                <div class="panel-heading panel-title">
+                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{rechercheAmiManagedBean.envoieDemandeAmi}" value="Demander en ami"/>
+                                    <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
+                                    <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
+                                    <br/>
+                                    <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                                    
+
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </h:form>
                 </div>
             </div>
         </div>
+        
     </h:body>
 </html>
 

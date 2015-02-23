@@ -8,6 +8,8 @@ package metier;
 import dao.Message;
 import dao.MessageSessionBeanLocal;
 import dao.Utilisateur;
+import dao.UtilisateurSessionBeanLocal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -22,8 +24,9 @@ import javax.persistence.Query;
  */
 @Stateless
 public class AmisSessionBean implements AmisSessionBeanLocal {
+    
     @EJB
-    MessageSessionBeanLocal msbl;
+    UtilisateurSessionBeanLocal utilisateurDao;
     
     @PersistenceContext(unitName="AAW-ejbPU",type=PersistenceContextType.TRANSACTION)
     private EntityManager em; 
@@ -36,6 +39,11 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         this.em = em;
     }
 
+    @Override
+    public ArrayList<Utilisateur> rechercheAmi(String nom, String prenom) {
+        return utilisateurDao.findByNameAndFirstname(nom, prenom);
+    }
+    
     @Override
     public boolean demandeAmi(Integer utilisateurDemandeEnAmi, Integer utilisateurQuiDemande) {
         Query q = em.createQuery(
@@ -114,4 +122,6 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
         }
         return false;
     }
+
+
 }

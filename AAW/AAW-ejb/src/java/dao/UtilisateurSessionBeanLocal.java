@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
@@ -17,4 +18,5 @@ public interface UtilisateurSessionBeanLocal {
     public void update(Utilisateur i);
     public void delete(Utilisateur i);
     public Utilisateur find(String id);
+    public ArrayList<Utilisateur> findByNameAndFirstname(String nom, String prenom);
 }
