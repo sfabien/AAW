@@ -27,8 +27,13 @@ public class Utilisateur implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
     
-    //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //private List<Utilisateur> amis;
+    @ManyToMany
+    @JoinTable(
+	name="USER_AMIS",
+	joinColumns=@JoinColumn(name="ref_user"),
+	inverseJoinColumns=@JoinColumn(name="ref_ami")
+    )
+    private List<Utilisateur> amis;
     
     //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Utilisateur> demandeAmis;
@@ -47,6 +52,18 @@ public class Utilisateur implements Serializable {
         this.mdp=mdp;
         this.nom=nom;
         this.prenom=prenom;
+    }
+
+    public void addAmi(Utilisateur u) {
+        this.amis.add(u);
+    }
+    
+    public List<Utilisateur> getAmis() {
+        return amis;
+    }
+
+    public void setAmis(List<Utilisateur> amis) {
+        this.amis = amis;
     }
 
     public String getImage() {

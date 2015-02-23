@@ -32,7 +32,8 @@
                     <ul class="nav navbar-nav">
                         <li><h:link value="Accueil" outcome="accueil" /></li>     
                         <li class="active"><h:link value="Profil" outcome="profil" /></li>    
-                        <li><a href="">Mon compte</a></li>     
+                        <li><a href="">Mon compte</a></li>  
+                        <li><h:link value="Recherche" outcome="recherche" /></li> 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="">Déconnexion</a></li>
@@ -64,15 +65,18 @@
                         <f:view>
                             <h:form>
                                 <c:forEach items="#{accueilManagedBean.messages}" var="item">
-                                    <div class="panel panel-default">
+                                    <div class="panel">
                                         <div class="panel-heading panel-title">
                                             #{item.emetteur.nom} #{item.emetteur.prenom} 
                                             <br/>
+                                            Le
                                             <h:outputText value="#{item.dateEnvoi}">
-                                                <f:convertDateTime type="date" pattern="dd-MM-yyyy hh:mm"/>
+                                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                             </h:outputText>
-
-
+                                            à
+                                            <h:outputText value="#{item.dateEnvoi}">
+                                                <f:convertDateTime type="date" pattern="HH:mm"/>
+                                            </h:outputText>
                                         </div>
                                         <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
                                     </div>

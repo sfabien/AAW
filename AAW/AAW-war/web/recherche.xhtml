@@ -1,16 +1,85 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width"></meta>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="css/main.css" rel="stylesheet"></link>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <title>Social-AAW</title>
     </h:head>
     <h:body>
-        <H1> Chercher contact </H1>
-        <h:form id="form">
-            nom: <h:inputText id="nom" value="#{rechercheContactManagedBean.nom}" required="true" />
-            <h:commandButton value="OK" action="res_recherche.xhtml" />
-        </h:form>
+
+                <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="">Social-AAW</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><h:link value="Accueil" outcome="accueil" /></li>     
+                        <li><h:link value="Profil" outcome="profil" /></li>    
+                        <li><a href="">Mon compte</a></li>  
+                        <li class="active"><h:link value="Recherche" outcome="recherche" /></li> 
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-5">
+                <div class="well well-sm ">
+                    <p>
+                        <h1 class="form-signin-heading h-center">Recherche d'un ami</h1>
+                    </p>
+                    <h:form id="Inscription">
+                        <div class="row separation-actions">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <br/>
+                                <h:inputText class="form-control" id="Nom" value="#{creationManagedBean.nom}" p:placeholder="Nom" required="true" />
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <h:inputText class="form-control" id="Prenom" value="#{creationManagedBean.prenom}" p:placeholder="Prénom" required="true" />
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <h:inputText class="form-control" id="AdresseElectronique" value="#{creationManagedBean.id}" p:placeholder="Adresse électronique" required="true" />
+                            </div>
+                            <br/>
+                            <div class="col-sm-offset-3 col-sm-6">
+                                <br/>
+                                <h:commandButton class="form-control btn btn-info" action="#{creationManagedBean.creation()}" value="Rechercher"/>
+                                <br/><br/>
+                            </div>
+                        </div>
+                    </h:form>
+                    <p class="h-center">
+                        <h:outputText  value="#{creationManagedBean.messageInscription}"/>
+                    </p>
+                </div>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0">
+                <div class="well well-sm">
+                    <p>
+                        <h1 class="form-signin-heading h-center">Résultats</h1>
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>
 
