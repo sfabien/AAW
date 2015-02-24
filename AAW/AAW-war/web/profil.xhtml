@@ -53,6 +53,12 @@
                         <p>
                             <br/>
                             <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
+                            <h:form id="form" enctype="multipart/form-data">
+                                <span class="btn btn-default btn-file displayed">
+                                    Modifier image<h:inputFile  onchange="submit()" id="file" value="#{compteManagedBean.file}"/>
+                                </span>
+                            </h:form>
+                            
                         </p>
                         <br/>
                         <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>

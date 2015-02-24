@@ -20,4 +20,6 @@ public interface AuthentificatorSessionBeanLocal {
     public boolean connexion(String id, String mdp);
     
     public Utilisateur getUtilisateur(String id);
+    
+    public void changeImage(String id, String url);
 }

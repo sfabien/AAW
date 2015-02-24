@@ -48,4 +48,11 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
     public Utilisateur getUtilisateur(String id) {
         return utilisateurDao.find(id);
     }
+
+    @Override
+    public void changeImage(String id, String url) {
+        Utilisateur u = utilisateurDao.find(id);
+        u.setImage(url);
+        utilisateurDao.update(u);
+    }
 }

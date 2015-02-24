@@ -86,9 +86,12 @@
                     </div>
                 </div>
                 <div class=" col-sm-6">
-                    <div class="panel  panel-primary">
+                    <div>
+                
+                        </div>
+                        <div class="panel  panel-primary">
                         <div class="panel-heading panel-title">Exprimez vous !</div>
-                        <h:form>
+                          <h:form>
                             <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre message ici..." required="true"/>
                             <div class="panel-footer">
                                 <h:commandButton class="btn btn-info " action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
@@ -117,7 +120,7 @@
                                                 <f:convertDateTime type="date" pattern="HH:mm"/>
                                             </h:outputText>
                                         </div>
-                                        <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
+                                        <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>
                                     </div>
                                 </c:forEach>
                             </h:form>
