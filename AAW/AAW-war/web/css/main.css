@@ -9,6 +9,10 @@ body {
         background-position:50% 0%;
 }
 
+.btn-margin {
+    margin-top : 8px;
+}
+
 .h-center {
 	width: 100%;
 	text-align: center;

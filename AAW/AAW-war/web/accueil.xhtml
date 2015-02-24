@@ -37,7 +37,11 @@
                         <li><li><h:link value="Recherche d'un ami" outcome="recherche" /></li></li> 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="">Déconnexion</a></li>
+                        <li>
+                        <h:form>
+                            <h:commandButton class="btn-margin btn btn-default " action="#{accueilManagedBean.deconnexion()}" value="Déconnexion"/>
+                        </h:form>
+                        </li>
                     </ul>
                 </div>
             </div>

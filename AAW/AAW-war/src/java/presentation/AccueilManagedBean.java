@@ -6,10 +6,13 @@ package presentation;
 
 import dao.Message;
 import dao.Utilisateur;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -93,6 +96,18 @@ public class AccueilManagedBean {
     
     public void accepterAmi(String idAmi) {
         amisService.accepteAmi(idAmi, (String)getHttpSession().getAttribute("id"));
+    }
+    
+    public void deconnexion(){
+       FacesContext context = FacesContext.getCurrentInstance();  
+       HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
+       HttpSession httpSession = request.getSession(true);
+       httpSession.invalidate();
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AccueilManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private HttpSession getHttpSession() {
