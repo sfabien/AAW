@@ -4,18 +4,15 @@
  */
 package presentation;
 
-import dao.Message;
 import dao.Utilisateur;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import metier.AmisSessionBeanLocal;
-import metier.EnvoieMessageSessionBeanLocal;
 
 
 /**
@@ -23,7 +20,7 @@ import metier.EnvoieMessageSessionBeanLocal;
  * @author sfabien
  */
 @ManagedBean(name="rechercheAmiManagedBean")
-@RequestScoped
+@ViewScoped
 public class RechercheAmiManagedBean {
 
     @EJB
@@ -74,7 +71,14 @@ public class RechercheAmiManagedBean {
         message = "Recherche...";
     }
     
-    public void envoieDemandeAmi() {
-        message = "Demande envoyée !";
+    public void envoieDemandeAmi(String idAmi) {
+        amisService.demandeAmi(idAmi, (String)getHttpSession().getAttribute("id"));
+        message = "Demande envoyée ! ";
+    }
+    
+    private HttpSession getHttpSession() {
+        FacesContext context = FacesContext.getCurrentInstance();  
+        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
+        return request.getSession(true);
     }
 }

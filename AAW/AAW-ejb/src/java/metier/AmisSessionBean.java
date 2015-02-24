@@ -27,17 +27,6 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     
     @EJB
     UtilisateurSessionBeanLocal utilisateurDao;
-    
-    @PersistenceContext(unitName="AAW-ejbPU",type=PersistenceContextType.TRANSACTION)
-    private EntityManager em; 
-    
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
 
     @Override
     public ArrayList<Utilisateur> rechercheAmi(String nom, String prenom) {
@@ -45,27 +34,17 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
     
     @Override
-    public boolean demandeAmi(Integer utilisateurDemandeEnAmi, Integer utilisateurQuiDemande) {
-        Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiDemande);
-        
-        Query q2 = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurDemandeEnAmi);
-        
-        if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            //u2.getDemandeAmis().add(u);
-            return true;
-        }
-        return false;
+    public boolean demandeAmi(String utilisateurDemandeEnAmi, String utilisateurQuiDemande) {
+        Utilisateur u = utilisateurDao.find(utilisateurQuiDemande);
+        Utilisateur ami = utilisateurDao.find(utilisateurDemandeEnAmi);
+        u.addDemandeAmi(ami);
+        utilisateurDao.update(u);
+        return true;
     }
     
     @Override
     public boolean accepteAmi(Integer utilisateurQuiAccepte, Integer utilisateurQuiDemande) {
-        Query q = em.createQuery(
+        /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiAccepte);
         
@@ -80,13 +59,13 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
             //u2.getAmis().add(u);
             //u.getAmis().add(u2);
             return true;
-        }
+        }*/
         return false;
     }
     
     @Override
     public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande) {
-        Query q = em.createQuery(
+        /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiRefuse);
         
@@ -99,13 +78,13 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
             Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
             //u.getDemandeAmis().remove(u2);
             return true;
-        }
+        }*/
         return false;
     }
     
     @Override
     public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) {
-        Query q = em.createQuery(
+        /*Query q = em.createQuery(
             "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
         q.setParameter(1,utilisateurQuiSupprime);
         
@@ -119,7 +98,7 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
             //u2.getAmis().remove(u);
             //u.getAmis().remove(u2);
             return true;
-        }
+        }*/
         return false;
     }
 

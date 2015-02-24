@@ -81,7 +81,7 @@
                         <c:forEach items="#{rechercheAmiManagedBean.amis}" var="item">
                             <div class="panel">
                                 <div class="panel-heading panel-title">
-                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{rechercheAmiManagedBean.envoieDemandeAmi}" value="Demander en ami"/>
+                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{rechercheAmiManagedBean.envoieDemandeAmi(item.email)}" value="Demander en ami"/>
                                     <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
                                     <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
                                     <br/>

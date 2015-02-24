@@ -35,8 +35,13 @@ public class Utilisateur implements Serializable {
     )
     private List<Utilisateur> amis;
     
-    //@OneToMany(mappedBy= "idUtilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //private List<Utilisateur> demandeAmis;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+	name="USER_DEMANDEAMIS",
+	joinColumns=@JoinColumn(name="ref_user"),
+	inverseJoinColumns=@JoinColumn(name="ref_ami")
+    )
+    private List<Utilisateur> demandeAmis;
     
     //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     //private List<Message> messagePublic;
@@ -53,6 +58,18 @@ public class Utilisateur implements Serializable {
         this.nom=nom;
         this.prenom=prenom;
         this.image = "http://res.cloudinary.com/df6myek6a/image/upload/v1418980152/default_avatar.png";
+    }
+
+    public void addDemandeAmi(Utilisateur u) {
+        this.demandeAmis.add(u);
+    }
+    
+    public List<Utilisateur> getDemandeAmis() {
+        return demandeAmis;
+    }
+
+    public void setDemandeAmis(List<Utilisateur> demandeAmis) {
+        this.demandeAmis = demandeAmis;
     }
 
     public void addAmi(Utilisateur u) {

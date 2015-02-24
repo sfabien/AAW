@@ -9,12 +9,14 @@ import dao.Utilisateur;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import metier.AmisSessionBeanLocal;
 import metier.AuthentificatorSessionBeanLocal;
 import metier.EnvoieMessageSessionBeanLocal;
 
@@ -32,6 +34,9 @@ public class AccueilManagedBean {
     
     @EJB
     EnvoieMessageSessionBeanLocal envoieMessageService;
+    
+    @EJB
+    AmisSessionBeanLocal amisService;
     
     private String message;
     
@@ -71,10 +76,18 @@ public class AccueilManagedBean {
         return envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
     }
     
+    public List<Utilisateur> getDemandesAmi() {
+        return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getDemandeAmis();
+    }
+    
     public void envoieMessage(){
         Utilisateur u = authService.getUtilisateur((String)getHttpSession().getAttribute("id"));
         envoieMessageService.envoieMessagePublic(message,u,u);
         message = "";
+    }
+    
+    public void accepterAmi() {
+        
     }
     
     private HttpSession getHttpSession() {
