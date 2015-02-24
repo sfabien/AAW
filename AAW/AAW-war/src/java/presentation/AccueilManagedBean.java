@@ -77,7 +77,11 @@ public class AccueilManagedBean {
     }
 
     public ArrayList<Message> getMessages() {
-        return envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
+        ArrayList<Message> mess = envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
+        for(Utilisateur ami : getAmis()) {
+            mess.addAll(ami.getMessages());
+        }
+        return mess;
     }
     
     public List<Utilisateur> getDemandesAmi() {
@@ -99,12 +103,18 @@ public class AccueilManagedBean {
     }
     
     public void deconnexion(){
-       FacesContext context = FacesContext.getCurrentInstance();  
-       HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-       HttpSession httpSession = request.getSession(true);
-       httpSession.invalidate();
+       getHttpSession().invalidate();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AccueilManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void versProfil(String idAmi) {
+        getHttpSession().setAttribute("idAmi", idAmi);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profilami.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(AccueilManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
