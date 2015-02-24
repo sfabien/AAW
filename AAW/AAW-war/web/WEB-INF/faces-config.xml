@@ -7,19 +7,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-<navigation-rule>
-        <from-view-id>/ajout.xhtml</from-view-id>
-        <navigation-case>
-            <from-action> #{ajouterContactManagedBean.ajouterContact()}</from-action>
-            <from-outcome>true</from-outcome>
-            <to-view-id>/gestion.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action> #{ajouterContactManagedBean.ajouterContact()}</from-action>
-            <from-outcome>false</from-outcome>
-            <to-view-id>/ajout.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
     
     <navigation-rule>
         <from-view-id>/recherche.xhtml</from-view-id>
@@ -27,15 +14,6 @@
             <from-action> #{rechercheAmiManagedBean.envoieDemandeAmi()}</from-action>
             <from-outcome>true</from-outcome>
             <to-view-id>/accueil.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-   <navigation-rule>
-        <from-view-id>/gestion.xhtml</from-view-id>
-        <navigation-case>
-            <from-action> #{deconnexion.deconnexion()}</from-action>
-            <from-outcome>true</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -62,35 +40,5 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/supprcompte.xhtml</from-view-id>
-        <navigation-case>
-            <from-action> #{suppresionCompteManagedBean.suppresion()}</from-action>
-            <from-outcome>true</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action> #{suppresionCompteManagedBean.suppresion()}</from-action>
-            <from-outcome>false</from-outcome>
-            <to-view-id>/gestion.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/suppr.xhtml</from-view-id>
-        <navigation-case>
-            <from-action> #{supprimerContactManagedBean.supprimerContact()}</from-action>
-            <from-outcome>true</from-outcome>
-            <to-view-id>/gestion.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action> #{supprimerContactManagedBean.supprimerContact()}</from-action>
-            <from-outcome>false</from-outcome>
-            <to-view-id>/suppr.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-
-
 </faces-config>

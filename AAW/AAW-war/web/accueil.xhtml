@@ -74,6 +74,7 @@
                             <c:forEach items="#{accueilManagedBean.amis}" var="item">
                                 <div class="panel">
                                     <div class="panel-heading panel-title">
+                                        <h:commandButton id ="search" class="pull-right btn btn-primary" actionListener="#{accueilManagedBean.accepterAmi(item.email)}" value="Profil"/>
                                         <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
                                         <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
                                         <br/>

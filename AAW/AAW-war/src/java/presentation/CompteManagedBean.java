@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean(name="suppresionCompteManagedBean")
 @RequestScoped
-public class SuppresionCompteManagedBean {
+public class CompteManagedBean {
 
     /*@EJB
     AnnuaireLocal service;
@@ -26,7 +26,7 @@ public class SuppresionCompteManagedBean {
     private String id;
     private String mdp;
     
-    public SuppresionCompteManagedBean() {
+    public CompteManagedBean() {
     }
 
     public String getId() {
