@@ -13,6 +13,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,7 @@ import metier.EnvoieMessageSessionBeanLocal;
  * @author sfabien
  */
 @ManagedBean(name="accueilManagedBean")
-@RequestScoped
+@ViewScoped
 public class AccueilManagedBean {
 
     @EJB
@@ -80,14 +81,18 @@ public class AccueilManagedBean {
         return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getDemandeAmis();
     }
     
+    public List<Utilisateur> getAmis() {
+        return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getAmis();
+    }
+    
     public void envoieMessage(){
         Utilisateur u = authService.getUtilisateur((String)getHttpSession().getAttribute("id"));
         envoieMessageService.envoieMessagePublic(message,u,u);
         message = "";
     }
     
-    public void accepterAmi() {
-        
+    public void accepterAmi(String idAmi) {
+        amisService.accepteAmi(idAmi, (String)getHttpSession().getAttribute("id"));
     }
     
     private HttpSession getHttpSession() {

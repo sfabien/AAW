@@ -37,30 +37,21 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     public boolean demandeAmi(String utilisateurDemandeEnAmi, String utilisateurQuiDemande) {
         Utilisateur u = utilisateurDao.find(utilisateurQuiDemande);
         Utilisateur ami = utilisateurDao.find(utilisateurDemandeEnAmi);
-        u.addDemandeAmi(ami);
-        utilisateurDao.update(u);
+        ami.addDemandeAmi(u);
+        utilisateurDao.update(ami);
         return true;
     }
     
     @Override
-    public boolean accepteAmi(Integer utilisateurQuiAccepte, Integer utilisateurQuiDemande) {
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiAccepte);
-        
-        Query q2 = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiDemande);
-        
-        if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            //u.getDemandeAmis().remove(u2);
-            //u2.getAmis().add(u);
-            //u.getAmis().add(u2);
-            return true;
-        }*/
-        return false;
+    public boolean accepteAmi(String idAmi, String idUtilisateur) {
+        Utilisateur u = utilisateurDao.find(idUtilisateur);
+        Utilisateur ami = utilisateurDao.find(idAmi);
+        ami.addAmi(u);
+        utilisateurDao.update(ami);
+        u.addAmi(ami);
+        u.suppDemandeAmi(ami);
+        utilisateurDao.update(u);
+        return true;
     }
     
     @Override

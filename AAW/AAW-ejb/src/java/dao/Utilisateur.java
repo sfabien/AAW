@@ -27,7 +27,7 @@ public class Utilisateur implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
 	name="USER_AMIS",
 	joinColumns=@JoinColumn(name="ref_user"),
@@ -62,6 +62,10 @@ public class Utilisateur implements Serializable {
 
     public void addDemandeAmi(Utilisateur u) {
         this.demandeAmis.add(u);
+    }
+    
+    public void suppDemandeAmi(Utilisateur u) {
+        this.demandeAmis.remove(u);
     }
     
     public List<Utilisateur> getDemandeAmis() {

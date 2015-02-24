@@ -45,20 +45,40 @@
 
         <div>
             <div class=" col-sm-12">
-                <div class="col-sm-3 well well-sm">
-                    <p>
+                <div class="col-sm-3">
+                    <div class="well well-sm">
+                        <p>
+                            <br/>
+                            <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
+                        </p>
                         <br/>
-                        <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
-                    </p>
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="Nom" value="#{accueilManagedBean.nom} " />
-                    <h:outputText id="Prenom" value="#{accueilManagedBean.prenom}" />
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
+                        <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="Nom" value="#{accueilManagedBean.nom} " />
+                        <h:outputText id="Prenom" value="#{accueilManagedBean.prenom}" />
+                        <br/>
+                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
+                    </div>
+
+                    <div class="well well-sm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading panel-title">Amis</div>
+                        </div>
+                        <h:form>
+                            <c:forEach items="#{accueilManagedBean.amis}" var="item">
+                                <div class="panel">
+                                    <div class="panel-heading panel-title">
+                                        <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
+                                        <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
+                                        <br/>
+                                        <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </h:form>
+                    </div>
                 </div>
                 <div class=" col-sm-6">
                     <div class="panel  panel-primary">
@@ -82,7 +102,6 @@
                                         <div class="panel-heading panel-title">
                                             <h:graphicImage class="dimension-img-pub pull-left" value="#{item.emetteur.image}" />
                                             <h:outputText id="Nom" value="&nbsp;#{item.emetteur.nom} #{item.emetteur.prenom}" />
-
                                             <br/>
                                             &nbsp;Le
                                             <h:outputText value="#{item.dateEnvoi}">
@@ -108,7 +127,7 @@
                         <c:forEach items="#{accueilManagedBean.demandesAmi}" var="item">
                             <div class="panel">
                                 <div class="panel-heading panel-title">
-                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.accepterAmi()}" value="Accepter"/>
+                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.accepterAmi(item.email)}" value="Accepter"/>
                                     <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
                                     <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
                                     <br/>
