@@ -21,21 +21,21 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
+
     @EJB
     MessageSessionBeanLocal messageDao;
-    
+
     @EJB
     UtilisateurSessionBeanLocal utilisateurDao;
 
     @Override
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
-        Message m = new Message(message,emetteur,recepteur,Message.PUBLIC);
+        Message m = new Message(message, emetteur, recepteur, Message.PUBLIC);
         Message mess = messageDao.save(m);
-        if(recepteur.getEmail().equals(emetteur.getEmail())) {
+        if (recepteur.getEmail().equals(emetteur.getEmail())) {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
-        }
-        else {
+        } else {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
             emetteur.addMessage(mess);
@@ -47,16 +47,40 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     public void envoieMessagePrive(Message h) {
         //messageDao.save(h);
         /*Utilisateur emetteur=h.getEmetteur();
-        Utilisateur destinataire = h.getRecepteur();
-        destinataire.getMessagePersonel().add(h);
-        emetteur.getMessagePersonel().add(h);*/
+         Utilisateur destinataire = h.getRecepteur();
+         destinataire.getMessagePersonel().add(h);
+         emetteur.getMessagePersonel().add(h);*/
         //em.flush();
     }
 
+    private boolean contientMessage(ArrayList<Message> mess, Message m) {
+        for (Message me : mess) {
+            if (me.getId().equals(m.getId()) && me.getDateEnvoi().equals(m.getDateEnvoi())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public ArrayList<Message> mur(Utilisateur u) {
-        ArrayList<Message> mess = messageDao.listByUser(u);
+        ArrayList<Message> mess = new ArrayList<>();
+        for (Message m : messageDao.listByUser(u)) {
+            if (m.getDiscriminant().equals(Message.PUBLIC)) {
+                if (!contientMessage(mess, m)) {
+                    mess.add(m);
+                }
+            }
+        }
+        for (Utilisateur ami : u.getAmis()) {
+            for (Message m : ami.getMessages()) {
+                if (m.getDiscriminant().equals(Message.PUBLIC)) {
+                    if (!contientMessage(mess, m)) {
+                        mess.add(m);
+                    }
+                }
+            }
+        }
         Collections.sort(mess, new Comparator<Message>() {
             @Override
             public int compare(Message s1, Message s2) {
@@ -65,20 +89,20 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
         });
         return mess;
         /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,idpersonne);*/
-        
+         "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
+         q.setParameter(1,idpersonne);*/
+
         /*if(!q.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);*/
-            /*if(idCourant.equals(idpersonne)){
-                List<Message> m = u.getMessagePersonel();
-                for(Message me:u.getMessagePublic()){
-                    m.add(me);
-                }
-                return m;
-            }else{
-                return u.getMessagePublic();
-            }*/
+         Utilisateur u = (Utilisateur) q.getResultList().get(0);*/
+        /*if(idCourant.equals(idpersonne)){
+         List<Message> m = u.getMessagePersonel();
+         for(Message me:u.getMessagePublic()){
+         m.add(me);
+         }
+         return m;
+         }else{
+         return u.getMessagePublic();
+         }*/
         //}
     }
 }

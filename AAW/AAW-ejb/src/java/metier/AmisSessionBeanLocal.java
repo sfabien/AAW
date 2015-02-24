@@ -5,7 +5,6 @@
  */
 package metier;
 
-import dao.Message;
 import dao.Utilisateur;
 import java.util.ArrayList;
 import javax.ejb.Local;

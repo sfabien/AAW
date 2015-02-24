@@ -8,7 +8,6 @@ package metier;
 import dao.Message;
 import dao.Utilisateur;
 import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Local;
 
 /**

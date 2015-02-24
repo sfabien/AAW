@@ -6,13 +6,10 @@ package presentation;
 
 import dao.Message;
 import dao.Utilisateur;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;

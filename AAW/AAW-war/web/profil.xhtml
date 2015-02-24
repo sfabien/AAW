@@ -37,9 +37,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                        <h:form>
-                            <h:commandButton class="btn-margin btn btn-default " action="#{accueilManagedBean.deconnexion()}" value="Déconnexion"/>
-                        </h:form>
+                            <h:form>
+                                <h:commandButton class="btn-margin btn btn-default " action="#{accueilManagedBean.deconnexion()}" value="Déconnexion"/>
+                            </h:form>
                         </li>
                     </ul>
                 </div>
@@ -48,60 +48,62 @@
 
         <div class="container">
             <div class=" col-sm-12">
-                                <div class="col-sm-3 well well-sm">
-                    <p>
+                <div class="col-sm-4">
+                    <div class="well well-sm">
+                        <p>
+                            <br/>
+                            <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
+                        </p>
                         <br/>
-                        <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
-                    </p>
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="Nom" value="#{accueilManagedBean.nom} " />
-                    <h:outputText id="Prenom" value="#{accueilManagedBean.prenom}" />
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
-                </div>
-                <div class=" col-sm-8">
-                    <div class="panel  panel-primary">
-                        <div class="panel-heading panel-title">Exprimez vous !</div>
-                        <h:form>
-                            <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre message ici..." required="true"/>
-                            <div class="panel-footer">
-                                <h:commandButton class="droite btn btn-info" action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
-                            </div>
-                        </h:form>
+                        <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="Nom" value="#{accueilManagedBean.nom} " />
+                        <h:outputText id="Prenom" value="#{accueilManagedBean.prenom}" />
+                        <br/>
+                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="AdresseElectronique" value="#{accueilManagedBean.id}" />
                     </div>
-                    <br/>
-                    <div class="well well-sm ">
-                        <f:view>
+                </div>
+                    <div class=" col-sm-8">
+                        <div class="panel  panel-primary">
+                            <div class="panel-heading panel-title">Exprimez vous !</div>
                             <h:form>
-                                <c:forEach items="#{accueilManagedBean.messages}" var="item">
-                                    <div class="panel">
-                                        <div class="panel-heading panel-title">
-                                            <h:graphicImage class="dimension-img-pub pull-left" value="#{item.emetteur.image}" />
-                                            <h:outputText id="Nom" value="&nbsp;#{item.emetteur.nom} #{item.emetteur.prenom}" />
-
-                                            <br/>
-                                            &nbsp;Le
-                                            <h:outputText value="#{item.dateEnvoi}">
-                                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                                            </h:outputText>
-                                            à
-                                            <h:outputText value="#{item.dateEnvoi}">
-                                                <f:convertDateTime type="date" pattern="HH:mm"/>
-                                            </h:outputText>
-                                        </div>
-                                        <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
-                                    </div>
-                                </c:forEach>
+                                <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre message ici..." required="true"/>
+                                <div class="panel-footer">
+                                    <h:commandButton class="droite btn btn-info" action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
+                                </div>
                             </h:form>
-                        </f:view>
+                        </div>
+                        <br/>
+                        <div class="well well-sm ">
+                            <f:view>
+                                <h:form>
+                                    <c:forEach items="#{accueilManagedBean.messages}" var="item">
+                                        <div class="panel">
+                                            <div class="panel-heading panel-title">
+                                                <h:graphicImage class="dimension-img-pub pull-left" value="#{item.emetteur.image}" />
+                                                <h:outputText id="Nom" value="&nbsp;#{item.emetteur.nom} #{item.emetteur.prenom}" />
+
+                                                <br/>
+                                                &nbsp;Le
+                                                <h:outputText value="#{item.dateEnvoi}">
+                                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                                à
+                                                <h:outputText value="#{item.dateEnvoi}">
+                                                    <f:convertDateTime type="date" pattern="HH:mm"/>
+                                                </h:outputText>
+                                            </div>
+                                            <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
+                                        </div>
+                                    </c:forEach>
+                                </h:form>
+                            </f:view>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </h:body>
 </html>
 

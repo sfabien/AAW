@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -77,11 +76,9 @@ public class AccueilManagedBean {
     }
 
     public ArrayList<Message> getMessages() {
-        ArrayList<Message> mess = envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
-        for(Utilisateur ami : getAmis()) {
-            mess.addAll(ami.getMessages());
-        }
-        return mess;
+        return envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
+
+        
     }
     
     public List<Utilisateur> getDemandesAmi() {
