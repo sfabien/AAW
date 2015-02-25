@@ -73,6 +73,7 @@
                             <div class="panel">
                                 <div class="panel-heading panel-title">
                                     <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
+                                    <br/>
                                     <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
                                     <br/>
                                     <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
@@ -102,7 +103,7 @@
                                             <h:graphicImage class="dimension-img-pub pull-left" value="#{item.emetteur.image}" />
                                             <h:outputText id="Nom" value="&nbsp;#{item.emetteur.nom} #{item.emetteur.prenom}" />
 
-                                            <br/>
+                                            <br/><br/>
                                             &nbsp;Le
                                             <h:outputText value="#{item.dateEnvoi}">
                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>

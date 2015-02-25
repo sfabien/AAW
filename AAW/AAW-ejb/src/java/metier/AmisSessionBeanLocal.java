@@ -17,7 +17,7 @@ import javax.ejb.Local;
 public interface AmisSessionBeanLocal {
     public boolean demandeAmi(String utilisateurDemandeEnAmi, String utilisateurQuiDemande);
     public boolean accepteAmi(String idAmi, String idUtilisateur);
-    public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande);
-    public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) ;
+    public boolean refuseAmi(String utilisateurQuiRefuse, String utilisateurQuiDemande);
+    public boolean supprimeAmi(String utilisateurQuiSupprime, String amiASupprimer) ;
     public ArrayList<Utilisateur> rechercheAmi(String nom, String prenom);
 }

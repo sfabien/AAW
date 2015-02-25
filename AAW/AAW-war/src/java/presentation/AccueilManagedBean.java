@@ -108,6 +108,10 @@ public class AccueilManagedBean {
         amisService.accepteAmi(idAmi, (String)getHttpSession().getAttribute("id"));
     }
     
+    public void refuserAmi(String idAmi) {
+        amisService.refuseAmi((String)getHttpSession().getAttribute("id"),idAmi);
+    }
+    
     public void deconnexion(){
        getHttpSession().invalidate();
         try {
@@ -124,6 +128,10 @@ public class AccueilManagedBean {
         } catch (IOException ex) {
             Logger.getLogger(AccueilManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void supprAmi(String idAmi) {
+        amisService.supprimeAmi(idAmi, (String)getHttpSession().getAttribute("id"));
     }
     
     private HttpSession getHttpSession() {

@@ -75,10 +75,12 @@
                                 <div class="panel">
                                     <div class="panel-heading panel-title">
                                         <h:commandButton id ="search" class="pull-right btn btn-primary" actionListener="#{accueilManagedBean.versProfil(item.email)}" value="Profil"/>
+                                        <h:outputText id="Nom" class="pull-right" value="&nbsp;" />
+                                        <h:commandButton id ="search" class="pull-right btn btn-primary" actionListener="#{accueilManagedBean.supprAmi(item.email)}" value="Supprimer"/>
                                         <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
-                                        <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
                                         <br/>
-                                        <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                                        <br/>
+                                        <h:outputText id="Nom" value="&nbsp;&nbsp;&nbsp;&nbsp;#{item.nom}&nbsp;#{item.prenom}" />
                                     </div>
                                 </div>
                             </c:forEach>
@@ -110,7 +112,7 @@
                                         <div class="panel-heading panel-title">
                                             <h:graphicImage class="dimension-img-pub pull-left" value="#{item.emetteur.image}" />
                                             <h:outputText id="Nom" value="&nbsp;#{item.emetteur.nom} #{item.emetteur.prenom}" />
-                                            <br/>
+                                            <br/><br/>
                                             &nbsp;Le
                                             <h:outputText value="#{item.dateEnvoi}">
                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
@@ -127,37 +129,42 @@
                         </f:view>
                     </div>
                 </div>
-                <div class=" col-sm-3 well well-sm">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">Demandes d'amis</div>
-                    </div>
-                    <h:form>
-                        <c:forEach items="#{accueilManagedBean.demandesAmi}" var="item">
-                            <div class="panel">
-                                <div class="panel-heading panel-title">
-                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.accepterAmi(item.email)}" value="Accepter"/>
-                                    <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
-                                    <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
-                                    <br/>
-                                    <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                <div class=" col-sm-3">
+                    <div class="well well-sm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading panel-title">Demandes d'amis</div>
+                        </div>
+                        <h:form>
+                            <c:forEach items="#{accueilManagedBean.demandesAmi}" var="item">
+                                <div class="panel">
+                                    <div class="panel-heading panel-title">
+                                        <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.accepterAmi(item.email)}" value="Accepter"/>
+                                        <h:outputText id="Nom" class="pull-right" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+                                        <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.refuserAmi(item.email)}" value="Refuser"/>
+                                        <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
+                                        <br/><br/>
+                                        <h:outputText id="Nom" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{item.nom}&nbsp;#{item.prenom}" />
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </h:form>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">Notifications</div>
+                            </c:forEach>
+                        </h:form>
                     </div>
-                    <h:form>
-                        <c:forEach items="#{accueilManagedBean.notifications}" var="item">
-                            <div class="panel">
-                                <div class="panel-heading panel-title">
-                                    
-                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.notificationsLu(item.id)}" value="Ok"/>
-                                    <h:outputText id="Notification" value="#{item.notifications}" />
+                    <div class="well well-sm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading panel-title">Notifications</div>
+                        </div>
+                        <h:form>
+                            <c:forEach items="#{accueilManagedBean.notifications}" var="item">
+                                <div class="panel">
+                                    <div class="panel-heading panel-title">
+
+                                        <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.notificationsLu(item.id)}" value="Ok"/>
+                                        <h:outputText id="Notification" value="#{item.notifications}" />
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </h:form>
+                            </c:forEach>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </div>

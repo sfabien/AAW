@@ -48,42 +48,23 @@ public class AmisSessionBean implements AmisSessionBeanLocal {
     }
     
     @Override
-    public boolean refuseAmi(Integer utilisateurQuiRefuse, Integer utilisateurQuiDemande) {
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiRefuse);
-        
-        Query q2 = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiDemande);
-        
-        if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            //u.getDemandeAmis().remove(u2);
-            return true;
-        }*/
-        return false;
+    public boolean refuseAmi(String utilisateurQuiRefuse, String utilisateurQuiDemande) {
+        Utilisateur u = utilisateurDao.find(utilisateurQuiRefuse);
+        Utilisateur ami = utilisateurDao.find(utilisateurQuiDemande);
+        u.getDemandeAmis().remove(ami);
+        utilisateurDao.update(u);
+        return true;
     }
     
     @Override
-    public boolean supprimeAmi(Integer utilisateurQuiSupprime, Integer amiASupprimer) {
-        /*Query q = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,utilisateurQuiSupprime);
-        
-        Query q2 = em.createQuery(
-            "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-        q.setParameter(1,amiASupprimer);
-        
-        if(!q.getResultList().isEmpty() && !q2.getResultList().isEmpty()){
-            Utilisateur u = (Utilisateur) q.getResultList().get(0);
-            Utilisateur u2 = (Utilisateur) q2.getResultList().get(0);
-            //u2.getAmis().remove(u);
-            //u.getAmis().remove(u2);
-            return true;
-        }*/
-        return false;
+    public boolean supprimeAmi(String utilisateurQuiSupprime, String amiASupprimer) {
+        Utilisateur u = utilisateurDao.find(utilisateurQuiSupprime);
+        Utilisateur ami = utilisateurDao.find(amiASupprimer);
+        ami.getAmis().remove(u);
+        u.getAmis().remove(ami);
+        utilisateurDao.update(ami);
+        utilisateurDao.update(u);
+        return true;
     }
 
 
