@@ -49,39 +49,39 @@
         <div class="container">
             <div class=" col-sm-12">
                 <div class="col-sm-4">
-                     <div class="well well-sm">
-                    <p>
+                    <div class="well well-sm">
+                        <p>
+                            <br/>
+                            <h:graphicImage class="dimension-img displayed" value="#{profilAmiManagedBean.image}" />
+                        </p>
                         <br/>
-                        <h:graphicImage class="dimension-img displayed" value="#{profilAmiManagedBean.image}" />
-                    </p>
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="Nom" value="#{profilAmiManagedBean.nom} " />
-                    <h:outputText id="Prenom" value="#{profilAmiManagedBean.prenom}" />
-                    <br/>
-                    <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    &nbsp;
-                    <h:outputText id="AdresseElectronique" value="#{profilAmiManagedBean.id}" />
-                </div>
-                <div class="well well-sm">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading panel-title">Amis</div>
+                        <span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="Nom" value="#{profilAmiManagedBean.nom} " />
+                        <h:outputText id="Prenom" value="#{profilAmiManagedBean.prenom}" />
+                        <br/>
+                        <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        &nbsp;
+                        <h:outputText id="AdresseElectronique" value="#{profilAmiManagedBean.id}" />
                     </div>
-                    <h:form>
-                        <c:forEach items="#{profilAmiManagedBean.amis}" var="item">
-                            <div class="panel">
-                                <div class="panel-heading panel-title">
-                                    <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
-                                    <br/>
-                                    <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
-                                    <br/>
-                                    <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                    <div class="well well-sm">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading panel-title">Amis</div>
+                        </div>
+                        <h:form>
+                            <c:forEach items="#{profilAmiManagedBean.amis}" var="item">
+                                <div class="panel">
+                                    <div class="panel-heading panel-title">
+                                        <h:graphicImage class="dimension-img-pub pull-left" value="#{item.image}" />
+                                        <br/>
+                                        <h:outputText id="Nom" value="&nbsp;#{item.nom}" />
+                                        <br/>
+                                        <h:outputText id="Nom" value="&nbsp;#{item.prenom}" />
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </h:form>
-                </div>
+                            </c:forEach>
+                        </h:form>
+                    </div>
                 </div>
                 <div class=" col-sm-8">
                     <div class="panel  panel-primary">
@@ -114,6 +114,13 @@
                                             </h:outputText>
                                         </div>
                                         <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>   
+                                        <c:if test="#{item.discriminant == 1}">                   
+                                            <h:graphicImage class="dimension-imgurl displayed" value="#{item.url}" />
+                                        </c:if>
+                                        <c:if test="#{item.discriminant == 2}">
+                                            <iframe src="http://www.youtube.com/embed/#{item.url}" style="width:100%;height:400px" allowfullscreen="true"></iframe>
+
+                                        </c:if>
                                     </div>
                                 </c:forEach>
                             </h:form>
