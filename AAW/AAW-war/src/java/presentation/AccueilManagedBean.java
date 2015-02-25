@@ -143,6 +143,21 @@ public class AccueilManagedBean {
         }
     }
     
+        public void envoieMessageProfil(){
+        Utilisateur u = authService.getUtilisateur((String)getHttpSession().getAttribute("id"));
+        if(file != null)
+            changeImage();
+        file = null;
+        envoieMessageService.envoieMessagePublic(message,u,u,imagePub);
+        imagePub = null;
+        message = "";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("profil.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(AccueilManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void accepterAmi(String idAmi) {
         amisService.accepteAmi(idAmi, (String)getHttpSession().getAttribute("id"));
     }

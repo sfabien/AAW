@@ -32,7 +32,6 @@
                     <ul class="nav navbar-nav">
                         <li><h:link value="Accueil" outcome="accueil" /></li>     
                         <li class="active"><h:link value="Profil" outcome="profil" /></li>    
-                        <li><a href="">Mon compte</a></li>  
                         <li><h:link value="Recherche d'un ami" outcome="recherche" /></li> 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -86,8 +85,10 @@
                 <div class=" col-sm-8">
                     <div class="panel  panel-primary">
                         <div class="panel-heading panel-title">Exprimez vous !</div>
-                        <h:form>
+                        <h:form  id="form2" enctype="multipart/form-data">
                             <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{profilAmiManagedBean.message}" p:placeholder="Entrez votre message ici..." required="true"/>
+                            <h:inputFile class="form-control btn btn-info btn-file displayed" id="file" value="#{accueilManagedBean.file}"/>
+
                             <div class="panel-footer">
                                 <h:commandButton class="droite btn btn-info" action="#{profilAmiManagedBean.envoieMessage()}" value="Publier"/>
                             </div>
