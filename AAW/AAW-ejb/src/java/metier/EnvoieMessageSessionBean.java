@@ -34,16 +34,15 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     UtilisateurSessionBeanLocal utilisateurDao;
 
     @Override
+
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur, String url) {
-        Message mess;
+        Message m;
         if(url != null) {
-            Message m = new Message(message, emetteur, recepteur, 1);
+            m = new Message(message, emetteur, recepteur, 1);
             m.setUrl(url);
-            mess = messageDao.save(m);
         }
         else {
-            Message m = new Message(message, emetteur, recepteur, 0);
-            mess = messageDao.save(m);
+            m = new Message(message, emetteur, recepteur, 0);
         }
 
         String delims = "[ ]+";
@@ -71,8 +70,17 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                     }
                 }
             }
+            if(tokens[i].substring(0, 32).equals("https://www.youtube.com/watch?v=")){
+                String id=tokens[i].substring(32,tokens[i].length());
+                m.setUrl(id);
+                m.setDiscriminant(2);
+                System.out.println("ici" + id);
+            }
         }
 
+        
+        Message mess = messageDao.save(m);
+        System.out.println("ici");
         if (recepteur.getEmail().equals(emetteur.getEmail())) {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
@@ -107,14 +115,18 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     public ArrayList<Message> mur(Utilisateur u) {
         ArrayList<Message> mess = new ArrayList<>();
         for (Message m : messageDao.listByUser(u)) {
+
             if (!contientMessage(mess, m)) {
                 mess.add(m);
+
             }
         }
         for (Utilisateur ami : u.getAmis()) {
             for (Message m : ami.getMessages()) {
+
                 if (!contientMessage(mess, m)) {
                     mess.add(m);
+
                 }
 
             }

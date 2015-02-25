@@ -126,8 +126,13 @@
                                             </h:outputText>
                                         </div>
                                         <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>
+
                                         <c:if test="#{item.discriminant == 1}">                   
-                                                <h:graphicImage class="dimension-imgurl displayed" value="#{item.url}" />
+                                            <h:graphicImage class="dimension-imgurl displayed" value="#{item.url}" />
+                                        </c:if>
+                                        <c:if test="#{item.discriminant == 2}">
+                                            <iframe src="http://www.youtube.com/embed/#{item.url}" style="width:100%;height:400px" allowfullscreen="true"></iframe>
+
                                         </c:if>
                                     </div>
 
