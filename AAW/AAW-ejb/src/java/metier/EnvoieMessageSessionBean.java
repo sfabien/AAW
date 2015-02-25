@@ -63,6 +63,12 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                     }
                 }
             }
+            if(tokens[i].substring(0, 32).equals("https://www.youtube.com/watch?v=")){
+                String id=tokens[i].substring(32,tokens[i].length());
+                m.setUrl(id);
+                m.getDiscriminantMedia();
+                messageDao.update(m);
+            }
         }
         
         if (recepteur.getEmail().equals(emetteur.getEmail())) {
