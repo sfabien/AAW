@@ -38,9 +38,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                        <h:form>
-                            <h:commandButton class="btn-margin btn btn-default " action="#{accueilManagedBean.deconnexion()}" value="Déconnexion"/>
-                        </h:form>
+                            <h:form>
+                                <h:commandButton class="btn-margin btn btn-default " action="#{accueilManagedBean.deconnexion()}" value="Déconnexion"/>
+                            </h:form>
                         </li>
                     </ul>
                 </div>
@@ -89,12 +89,15 @@
                 </div>
                 <div class=" col-sm-6">
                     <div>
-                
-                        </div>
-                        <div class="panel  panel-primary">
+
+                    </div>
+                    <div class="panel  panel-primary">
                         <div class="panel-heading panel-title">Exprimez vous !</div>
-                          <h:form>
+                        <h:form id="form" enctype="multipart/form-data">
                             <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{accueilManagedBean.message}" p:placeholder="Entrez votre message ici..." required="true"/>
+
+                            <h:inputFile class="form-control btn btn-info btn-file displayed" id="file" value="#{accueilManagedBean.file}"/>
+
                             <div class="panel-footer">
                                 <h:commandButton class="btn btn-info " action="#{accueilManagedBean.envoieMessage()}" value="Publier"/>
                             </div>
@@ -123,7 +126,11 @@
                                             </h:outputText>
                                         </div>
                                         <h:inputTextarea rows ="4" class="form-control" id="Message" value="#{item.message}" readonly="true"/>
+                                        <c:if test="#{item.discriminant == 1}">                   
+                                                <h:graphicImage class="dimension-imgurl displayed" value="#{item.url}" />
+                                        </c:if>
                                     </div>
+
                                 </c:forEach>
                             </h:form>
                         </f:view>

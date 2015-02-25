@@ -26,7 +26,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
 
     @EJB
     MessageSessionBeanLocal messageDao;
-    
+
     @EJB
     NotificationsSessionBeanLocal notificationsDao;
 
@@ -34,28 +34,36 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     UtilisateurSessionBeanLocal utilisateurDao;
 
     @Override
-    public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
-        Message m = new Message(message, emetteur, recepteur, Message.PUBLIC);
-        Message mess = messageDao.save(m);
-        
+    public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur, String url) {
+        Message mess;
+        if(url != null) {
+            Message m = new Message(message, emetteur, recepteur, 1);
+            m.setUrl(url);
+            mess = messageDao.save(m);
+        }
+        else {
+            Message m = new Message(message, emetteur, recepteur, 0);
+            mess = messageDao.save(m);
+        }
+
         String delims = "[ ]+";
         String[] tokens = message.split(delims);
-        for (int i = 0; i < tokens.length; i++){
-            if(tokens[i].charAt(0)=='{' && tokens[i].charAt(tokens[i].length()-1)=='}'){
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].charAt(0) == '{' && tokens[i].charAt(tokens[i].length() - 1) == '}') {
                 String delims2 = "[.]+";
                 String[] tokens2 = tokens[i].split(delims2);
-                if(tokens2.length==2){
+                if (tokens2.length == 2) {
                     String nom = tokens2[0];
-                    nom=nom.substring(1, nom.length());
+                    nom = nom.substring(1, nom.length());
                     String prenom = tokens2[1];
-                    prenom=prenom.substring(0, prenom.length()-1);
-                    System.out.println(" la  : "+nom + " " +prenom);
-                    for(Utilisateur u : emetteur.getAmis()){
-                        if(u.getNom().equals(nom) && u.getPrenom().equals(prenom)){
+                    prenom = prenom.substring(0, prenom.length() - 1);
+                    System.out.println(" la  : " + nom + " " + prenom);
+                    for (Utilisateur u : emetteur.getAmis()) {
+                        if (u.getNom().equals(nom) && u.getPrenom().equals(prenom)) {
                             Notifications n = new Notifications();
                             n.setNotifications("Vous avez été notifié dans"
-                                    + " une publication par " + emetteur.getNom()+
-                                    " " + emetteur.getPrenom() + ".");
+                                    + " une publication par " + emetteur.getNom()
+                                    + " " + emetteur.getPrenom() + ".");
                             notificationsDao.save(n);
                             u.setNotifications(n);
                             utilisateurDao.update(u);
@@ -64,7 +72,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                 }
             }
         }
-        
+
         if (recepteur.getEmail().equals(emetteur.getEmail())) {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
@@ -99,19 +107,16 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     public ArrayList<Message> mur(Utilisateur u) {
         ArrayList<Message> mess = new ArrayList<>();
         for (Message m : messageDao.listByUser(u)) {
-            if (m.getDiscriminant().equals(Message.PUBLIC)) {
-                if (!contientMessage(mess, m)) {
-                    mess.add(m);
-                }
+            if (!contientMessage(mess, m)) {
+                mess.add(m);
             }
         }
         for (Utilisateur ami : u.getAmis()) {
             for (Message m : ami.getMessages()) {
-                if (m.getDiscriminant().equals(Message.PUBLIC)) {
-                    if (!contientMessage(mess, m)) {
-                        mess.add(m);
-                    }
+                if (!contientMessage(mess, m)) {
+                    mess.add(m);
                 }
+
             }
         }
         Collections.sort(mess, new Comparator<Message>() {
@@ -121,21 +126,5 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
             }
         });
         return mess;
-        /*Query q = em.createQuery(
-         "SELECT h FROM Utilisateur h WHERE h.idUtilisateur =?");
-         q.setParameter(1,idpersonne);*/
-
-        /*if(!q.getResultList().isEmpty()){
-         Utilisateur u = (Utilisateur) q.getResultList().get(0);*/
-        /*if(idCourant.equals(idpersonne)){
-         List<Message> m = u.getMessagePersonel();
-         for(Message me:u.getMessagePublic()){
-         m.add(me);
-         }
-         return m;
-         }else{
-         return u.getMessagePublic();
-         }*/
-        //}
     }
 }

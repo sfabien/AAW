@@ -78,7 +78,7 @@ public class ProfilAmiManagedBean {
     public void envoieMessage(){
         Utilisateur u = authService.getUtilisateur((String)getHttpSession().getAttribute("id"));
         Utilisateur ami = authService.getUtilisateur((String)getHttpSession().getAttribute("idAmi"));
-        envoieMessageService.envoieMessagePublic(message,u,ami);
+        envoieMessageService.envoieMessagePublic(message,u,ami,null);
         message = "";
     }
     

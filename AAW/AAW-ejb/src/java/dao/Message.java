@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public static final Integer PUBLIC = 1;
-    public static final Integer PRIVEE = 2;
+    public static final Integer IMAGE = 1;
+    public static final Integer VIDEO = 2;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

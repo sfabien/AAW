@@ -16,7 +16,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface EnvoieMessageSessionBeanLocal {
-    public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur);
+    public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur, String url);
     public void envoieMessagePrive(Message h);
     public ArrayList<Message> mur(Utilisateur u);
 }

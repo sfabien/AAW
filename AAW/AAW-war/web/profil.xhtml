@@ -52,8 +52,9 @@
                     <div class="well well-sm">
                         <p>
                             <br/>
-                            <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
+                            
                             <h:form id="form" enctype="multipart/form-data">
+                                <h:graphicImage class="dimension-img displayed" value="#{accueilManagedBean.image}" />
                                 <span class="btn btn-primary btn-file displayed">
                                     Modifier image<h:inputFile  onchange="submit()" id="file" value="#{compteManagedBean.file}"/>
                                 </span>
