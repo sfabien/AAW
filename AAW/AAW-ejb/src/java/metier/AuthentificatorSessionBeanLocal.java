@@ -4,6 +4,7 @@
  */
 package metier;
 
+import dao.Notifications;
 import dao.Utilisateur;
 import javax.ejb.Local;
 
@@ -20,6 +21,8 @@ public interface AuthentificatorSessionBeanLocal {
     public boolean connexion(String id, String mdp);
     
     public Utilisateur getUtilisateur(String id);
+    
+    public void notificationLu(String id,Long n);
     
     public void changeImage(String id, String url);
 }

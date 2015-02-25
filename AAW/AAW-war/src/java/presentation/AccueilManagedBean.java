@@ -5,6 +5,7 @@
 package presentation;
 
 import dao.Message;
+import dao.Notifications;
 import dao.Utilisateur;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,6 +80,14 @@ public class AccueilManagedBean {
         return envoieMessageService.mur(authService.getUtilisateur((String)getHttpSession().getAttribute("id")));
 
         
+    }
+    
+    public List<Notifications> getNotifications() {
+        return authService.getUtilisateur((String)getHttpSession().getAttribute("id")).getNotifications();
+    }
+    
+    public void notificationsLu(Long n) {
+        authService.notificationLu((String)getHttpSession().getAttribute("id"),n);
     }
     
     public List<Utilisateur> getDemandesAmi() {

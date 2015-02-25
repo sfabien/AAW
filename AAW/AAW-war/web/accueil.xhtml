@@ -144,6 +144,20 @@
                             </div>
                         </c:forEach>
                     </h:form>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading panel-title">Notifications</div>
+                    </div>
+                    <h:form>
+                        <c:forEach items="#{accueilManagedBean.notifications}" var="item">
+                            <div class="panel">
+                                <div class="panel-heading panel-title">
+                                    
+                                    <h:commandButton id ="search" class="pull-right btn btn-info" actionListener="#{accueilManagedBean.notificationsLu(item.id)}" value="Ok"/>
+                                    <h:outputText id="Notification" value="#{item.notifications}" />
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </h:form>
                 </div>
             </div>
         </div>

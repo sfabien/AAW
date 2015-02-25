@@ -7,6 +7,8 @@ package metier;
 
 import dao.Message;
 import dao.MessageSessionBeanLocal;
+import dao.NotificationsSessionBeanLocal;
+import dao.Notifications;
 import dao.Utilisateur;
 import dao.UtilisateurSessionBeanLocal;
 import java.util.ArrayList;
@@ -24,6 +26,9 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
 
     @EJB
     MessageSessionBeanLocal messageDao;
+    
+    @EJB
+    NotificationsSessionBeanLocal notificationsDao;
 
     @EJB
     UtilisateurSessionBeanLocal utilisateurDao;
@@ -32,6 +37,34 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
         Message m = new Message(message, emetteur, recepteur, Message.PUBLIC);
         Message mess = messageDao.save(m);
+        
+        String delims = "[ ]+";
+        String[] tokens = message.split(delims);
+        for (int i = 0; i < tokens.length; i++){
+            if(tokens[i].charAt(0)=='{' && tokens[i].charAt(tokens[i].length()-1)=='}'){
+                String delims2 = "[.]+";
+                String[] tokens2 = tokens[i].split(delims2);
+                if(tokens2.length==2){
+                    String nom = tokens2[0];
+                    nom=nom.substring(1, nom.length());
+                    String prenom = tokens2[1];
+                    prenom=prenom.substring(0, prenom.length()-1);
+                    System.out.println(" la  : "+nom + " " +prenom);
+                    for(Utilisateur u : emetteur.getAmis()){
+                        if(u.getNom().equals(nom) && u.getPrenom().equals(prenom)){
+                            Notifications n = new Notifications();
+                            n.setNotifications("Vous avez été notifié dans"
+                                    + " une publication par " + emetteur.getNom()+
+                                    " " + emetteur.getPrenom() + ".");
+                            notificationsDao.save(n);
+                            u.setNotifications(n);
+                            utilisateurDao.update(u);
+                        }
+                    }
+                }
+            }
+        }
+        
         if (recepteur.getEmail().equals(emetteur.getEmail())) {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);

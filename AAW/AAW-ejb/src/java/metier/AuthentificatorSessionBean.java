@@ -4,6 +4,8 @@
  */
 package metier;
 
+import dao.Notifications;
+import dao.NotificationsSessionBeanLocal;
 import dao.Utilisateur;
 import dao.UtilisateurSessionBeanLocal;
 import javax.ejb.EJB;
@@ -18,6 +20,9 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
 
     @EJB
     UtilisateurSessionBeanLocal utilisateurDao;
+    
+    @EJB
+    NotificationsSessionBeanLocal notificationsDao;
     
     @Override
     public boolean creation(String id, String mdp, String nom, String prenom) {
@@ -49,6 +54,13 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
         return utilisateurDao.find(id);
     }
 
+    public void notificationLu(String id,Long no){
+        Utilisateur u = utilisateurDao.find(id);
+        Notifications n = notificationsDao.find(no);
+        u.getNotifications().remove(n);
+        notificationsDao.delete(n);
+    }
+    
     @Override
     public void changeImage(String id, String url) {
         Utilisateur u = utilisateurDao.find(id);
