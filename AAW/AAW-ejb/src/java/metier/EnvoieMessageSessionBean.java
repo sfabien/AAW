@@ -38,7 +38,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
         Message m = new Message(message, emetteur, recepteur, Message.PUBLIC);
         
         
-        String delims = "[ ]+";
+        String delims = "[ \n]+";
         String[] tokens = message.split(delims);
         for (int i = 0; i < tokens.length; i++){
             if(tokens[i].charAt(0)=='{' && tokens[i].charAt(tokens[i].length()-1)=='}'){
@@ -63,11 +63,13 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
                     }
                 }
             }
-            if(tokens[i].substring(0, 32).equals("https://www.youtube.com/watch?v=")){
-                String id=tokens[i].substring(32,tokens[i].length());
-                m.setUrl(id);
-                m.setDiscriminant(2);
-                System.out.println("ici" + id);
+            if(tokens[i].length()>32){
+                if(tokens[i].substring(0, 32).equals("https://www.youtube.com/watch?v=")){
+                    String id=tokens[i].substring(32,tokens[i].length());
+                    m.setUrl(id);
+                    m.setDiscriminant(2);
+                    System.out.println("ici" + id);
+                }
             }
         }
         
