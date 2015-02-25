@@ -36,7 +36,7 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     @Override
     public void envoieMessagePublic(String message, Utilisateur emetteur, Utilisateur recepteur) {
         Message m = new Message(message, emetteur, recepteur, Message.PUBLIC);
-        Message mess = messageDao.save(m);
+        
         
         String delims = "[ ]+";
         String[] tokens = message.split(delims);
@@ -66,11 +66,13 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
             if(tokens[i].substring(0, 32).equals("https://www.youtube.com/watch?v=")){
                 String id=tokens[i].substring(32,tokens[i].length());
                 m.setUrl(id);
-                m.getDiscriminantMedia();
-                messageDao.update(m);
+                m.setDiscriminant(2);
+                System.out.println("ici" + id);
             }
         }
         
+        Message mess = messageDao.save(m);
+        System.out.println("ici");
         if (recepteur.getEmail().equals(emetteur.getEmail())) {
             recepteur.addMessage(mess);
             utilisateurDao.update(recepteur);
@@ -105,18 +107,17 @@ public class EnvoieMessageSessionBean implements EnvoieMessageSessionBeanLocal {
     public ArrayList<Message> mur(Utilisateur u) {
         ArrayList<Message> mess = new ArrayList<>();
         for (Message m : messageDao.listByUser(u)) {
-            if (m.getDiscriminant().equals(Message.PUBLIC)) {
+            
                 if (!contientMessage(mess, m)) {
                     mess.add(m);
-                }
+                
             }
         }
         for (Utilisateur ami : u.getAmis()) {
             for (Message m : ami.getMessages()) {
-                if (m.getDiscriminant().equals(Message.PUBLIC)) {
                     if (!contientMessage(mess, m)) {
                         mess.add(m);
-                    }
+                    
                 }
             }
         }
