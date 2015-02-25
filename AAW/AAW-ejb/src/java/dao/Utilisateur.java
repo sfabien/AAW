@@ -45,12 +45,6 @@ public class Utilisateur implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="ref_ami")
     )
     private List<Utilisateur> demandeAmis = new ArrayList<>();
-    
-    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //private List<Message> messagePublic;
-    
-    //@OneToMany(mappedBy= "idMessage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    //private List<Message> filActu;
 
     public Utilisateur() {
     }   
@@ -150,4 +144,6 @@ public class Utilisateur implements Serializable {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+    
+    
 }

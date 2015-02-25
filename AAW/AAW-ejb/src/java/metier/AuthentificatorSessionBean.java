@@ -54,6 +54,7 @@ public class AuthentificatorSessionBean implements AuthentificatorSessionBeanLoc
         return utilisateurDao.find(id);
     }
 
+    @Override
     public void notificationLu(String id,Long no){
         Utilisateur u = utilisateurDao.find(id);
         Notifications n = notificationsDao.find(no);

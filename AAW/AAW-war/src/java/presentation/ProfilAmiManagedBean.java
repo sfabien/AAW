@@ -15,7 +15,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import metier.AmisSessionBeanLocal;
 import metier.AuthentificatorSessionBeanLocal;
 import metier.EnvoieMessageSessionBeanLocal;
 
@@ -33,9 +32,6 @@ public class ProfilAmiManagedBean {
     
     @EJB
     EnvoieMessageSessionBeanLocal envoieMessageService;
-    
-    @EJB
-    AmisSessionBeanLocal amisService;
     
     private String message;
     

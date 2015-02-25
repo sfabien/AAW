@@ -32,6 +32,9 @@ public class Message implements Serializable {
     private Date dateEnvoi;
 
     @Column
+    private Integer discriminantMedia;
+    
+    @Column
     private Integer discriminant;
     
     public Message() {
@@ -42,6 +45,14 @@ public class Message implements Serializable {
         this.recepteur=re;
         this.message=message;
         this.discriminant=discrimant;
+    }
+
+    public Integer getDiscriminantMedia() {
+        return discriminantMedia;
+    }
+
+    public void setDiscriminantMedia(Integer discriminantMedia) {
+        this.discriminantMedia = discriminantMedia;
     }
 
     public Date getDateEnvoi() {
